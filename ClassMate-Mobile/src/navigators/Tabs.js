@@ -1,12 +1,16 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Dashboard from '../screens/Dashboard';
-import Ionicons from "react-native-vector-icons/Ionicons";
 import Profile from '../screens/Profile';
 import Login from '../screens/Login';
 import Register from '../screens/Register';
 import Stacks from './Stacks'
+import Ionicons from "react-native-vector-icons/Ionicons";
 
-
+import dashboardIcon from "../../assets/dashboard-icon.png";
+import profileIcon from "../../assets/profile-icon.png";
+import loginIcon from "../../assets/login-icon.png";
+import registerIcon from "../../assets/register-icon.png";
+import { Image } from 'react-native';
 
 const { Navigator, Screen } = createBottomTabNavigator();
 
@@ -33,12 +37,31 @@ export default function Tabs() {
         };
       }}
     >
-      <Screen name="Dashboard" component={Stacks} />
-      <Screen name="Profile" component={Profile} />
-      <Screen name="Login" component={Login} />
-      <Screen name="Register" component={Register} />
+      <Screen name="Dashboard" component={Stacks}
+        options={{
+          headerTitle: () => <Image source={dashboardIcon} style={{ width: 200, height: 50 }} />,
+          headerStyle: {
+            backgroundColor: "#086B1B"
+          },
+        }}/>
+      <Screen name="Profile" component={Profile} options={{
+          headerTitle: () => <Image source={profileIcon} style={{ width: 200, height: 50 }} />,
+          headerStyle: {
+            backgroundColor: "#086B1B"
+          },
+        }}/>
+      <Screen name="Login" component={Login} options={{
+          headerTitle: () => <Image source={dashboardIcon} style={{ width: 200, height: 50 }} />,
+          headerStyle: {
+            backgroundColor: "#086B1B"
+          },
+        }}/>
+      <Screen name="Register" component={Register} options={{
+          headerTitle: () => <Image source={dashboardIcon} style={{ width: 200, height: 50 }} />,
+          headerStyle: {
+            backgroundColor: "#086B1B"
+          },
+        }}/>
     </Navigator>
   );
 }
-
-
