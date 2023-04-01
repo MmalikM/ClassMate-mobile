@@ -13,3 +13,14 @@ export const login = (email, password) => {
     }
   };
 };
+
+export const register = (input) => {
+    return async () => {
+      try {
+        const {data} = await axios.post(baseUrl + "register", input);
+        return data
+      } catch (error) {
+          throw error
+      }
+    };
+  };
