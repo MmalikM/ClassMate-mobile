@@ -9,15 +9,27 @@ import {
   TextInput,
   TouchableOpacity,
 } from "react-native";
+import { useDispatch } from "react-redux";
+import { login } from "../stores/action/actionCreatorUser";
 
 export default function Login() {
   const navigation = useNavigation();
+  const dispatch = useDispatch()
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const submitLogin = () =>{
-    
+  const submitLogin = async () =>{
+    try {
+      const data = await dispatch(login(email,password))
+      console.log(data.data.access_token);
+      setEmail('')
+      setPassword('')
+      navigation.navigate('Dashboard')
+
+    } catch (error) {
+      throw error
+    }
   }
 
   return (
@@ -25,6 +37,7 @@ export default function Login() {
       <View style={{ flex: 8, backgroundColor: "pink" }}>
         <SafeAreaView>
           <TextInput
+            keyboardType="email-address"
             name="email"
             style={styles.input}
             onChangeText={setEmail}
@@ -47,15 +60,12 @@ export default function Login() {
             margin: 20,
             borderRadius: 15,
           }}
+          onPress={()=> submitLogin()}
         >
           <Text style={{ color: "#FFFFFF", textAlign: "center" }}>login</Text>
         </TouchableOpacity>
       </View>
-
-      <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-        <Text>Login Screen</Text>
-        <Button title="back" onPress={() => navigation.navigate("Home")} />
-      </View>
+  
     </View>
   );
 }

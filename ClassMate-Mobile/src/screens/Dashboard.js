@@ -24,14 +24,12 @@ export default function Dashboard() {
           return (
             <View key={index} style={styles.card}>
               <Text style={styles.asignmenName}>{asignmen.name}</Text>
-              <Text style={styles.asignmenClassId}>{asignmen.ClassId}</Text>
+              <Text style={styles.asignmenClassId}>{asignmen.subject}</Text>
             </View>
           );
         })}
       </ScrollView>
-      <View style={styles.buttonContainer}>
-        <Text>Detail Asignmen Screen</Text>
-      </View>
+     
     </View>
   );
 }
