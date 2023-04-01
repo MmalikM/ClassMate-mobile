@@ -12,6 +12,7 @@ import {
 } from "react-native";
 import { useDispatch } from "react-redux";
 import axios from "axios";
+import { register } from "../stores/action/actionCreatorUser";
 
 export default function Login() {
   const kelasList = [{id:1,name:'x'},{id:2,name:'xi'},{id:3,name:'xii'}]
@@ -40,15 +41,15 @@ export default function Login() {
     try {
       const input = {email,name,password,Class:kelas,address}
       console.log(input);
-      // const data = await dispatch()
-      // console.log(data.data.access_token);
+      const data = await dispatch(register(input))
+      console.log(data.access_token);
       setEmail('')
       setName('')
       setAddress('')
       setKelas('')
       setPassword('')
       setListClass([])
-      // navigation.navigate('Dashboard')
+      navigation.navigate('Dashboard')
 
     } catch (error) {
       throw error
