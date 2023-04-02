@@ -1,43 +1,56 @@
-import { useNavigation } from "@react-navigation/native";
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import { useState } from "react";
+import React, { useState } from "react";
 import {
-  Button,
-  Text,
   View,
+  Text,
   StyleSheet,
   SafeAreaView,
   TextInput,
   TouchableOpacity,
+  Image,
+  Dimensions,
 } from "react-native";
 import { useDispatch } from "react-redux";
+import { useNavigation } from "@react-navigation/native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { login } from "../stores/action/actionCreatorUser";
+import classmateKecil from "../../assets/classmate-kecil.png";
 
 export default function Login() {
   const navigation = useNavigation();
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const submitLogin = async () =>{
+  const submitLogin = async () => {
     try {
-      const data = await dispatch(login(email,password))
-      await AsyncStorage.setItem('access_token',data.access_token)
-      const token = await AsyncStorage.getItem('access_token');
-      setEmail('')
-      setPassword('')
-      navigation.push('Home')
-
+      const data = await dispatch(login(email, password));
+      await AsyncStorage.setItem("access_token", data.access_token);
+      const token = await AsyncStorage.getItem("access_token");
+      setEmail("");
+      setPassword("");
+      navigation.push("Home");
     } catch (error) {
-      throw error
+      throw error;
     }
-  }
+  };
+
+  const screenWidth = Dimensions.get("window").width;
+  const aspectRatio = 0.15;
+  const newHeight = screenWidth * aspectRatio;
 
   return (
-    <View style={[styles.container]}>
-      <View style={{ flex: 8, backgroundColor: "pink" }}>
-        <SafeAreaView>
+    <View style={styles.container}>
+      <Image
+        source={classmateKecil}
+        style={{
+          width: screenWidth,
+          height: newHeight,
+          alignSelf: "center",
+          marginBottom: 20,
+        }}
+      />
+      <SafeAreaView style={styles.formContainer}>
           <TextInput
             keyboardType="email-address"
             name="email"
@@ -56,44 +69,60 @@ export default function Login() {
           />
         </SafeAreaView>
         <TouchableOpacity
-          style={{
-            backgroundColor: "blue",
-            paddingVertical: 14,
-            margin: 20,
-            borderRadius: 15,
-          }}
-          onPress={()=> submitLogin}
-        >
-          <Text style={{ color: "#FFFFFF", textAlign: "center" }}>login</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={{
-            backgroundColor: "blue",
-            paddingVertical: 14,
-            margin: 20,
-            borderRadius: 15,
-          }}
-          onPress={()=> navigation.navigate('Register')}
-        >
-          <Text style={{ color: "#FFFFFF", textAlign: "center" }}>register</Text>
-        </TouchableOpacity>
-      </View>
-  
+        style={styles.loginButton}
+        onPress={() => submitLogin()}
+      >
+        <Text style={styles.buttonText}>login</Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        style={styles.registerButton}
+        onPress={() => navigation.navigate("Register")}
+      >
+        <Text style={styles.buttonText}>register</Text>
+      </TouchableOpacity>
     </View>
   );
+
 }
 
 const styles = StyleSheet.create({
   container: {
-    flexDirection: "column",
     backgroundColor: "#FCFFE7",
     flex: 1,
+    paddingHorizontal: 20,
+  },
+  formContainer: {
+    flex: 1,
+    backgroundColor: "#FFFFFF",
+    borderRadius: 10,
     padding: 20,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
+    marginBottom: 20,
   },
   input: {
     height: 40,
     margin: 12,
     borderWidth: 1,
     padding: 10,
+  },
+  loginButton: {
+    backgroundColor: "blue",
+    paddingVertical: 14,
+    marginBottom: 10,
+    borderRadius: 15,
+  },
+  registerButton: {
+    backgroundColor: "blue",
+    paddingVertical: 14,
+    marginBottom: 20,
+    borderRadius: 15,
+  },
+  buttonText: {
+    color: "#FFFFFF",
+    textAlign: "center",
   },
 });
