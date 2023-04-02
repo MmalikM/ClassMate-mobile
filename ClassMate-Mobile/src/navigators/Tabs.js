@@ -25,7 +25,7 @@ export default function Tabs() {
             if (route.name === "Dashboard") {
               iconName = focused ? "home-sharp" : "home-outline";
             } else if (route.name === "Profile") {
-              iconName = focused ? "heart-sharp" : "heart-outline";
+              iconName = focused ? "people-sharp" : "people-outline";
             } 
             return <Ionicons name={iconName} size={size} color={color} />;
           },

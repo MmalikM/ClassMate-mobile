@@ -1,18 +1,44 @@
-import React from 'react';
+import React, { useState, useEffect } from "react";
 import { useNavigation } from "@react-navigation/native";
-
 import { View, Text, StyleSheet, Button } from "react-native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { login } from "../../src/stores/action/actionCreatorUser"; // Import the login function
 
 const Profile = () => {
   const navigation = useNavigation();
+  const [userData, setUserData] = useState(null);
 
-  const userData = {
-    name: "John Doe",
-    email: "johndoe@example.com",
-    role: "Student",
-    address: "123 Main Street, City, Country",
-    className: "Math 101",
+  const fetchUserData = async () => {
+    try {
+      const token = await AsyncStorage.getItem("access_token");
+      // Use the login function instead of fetch
+      const data = await login("email@example.com", "password");
+      if (data) {
+        setUserData(data);
+      } else {
+        console.log("Error fetching user data");
+      }
+    } catch (error) {
+      console.log("Error fetching user data:", error);
+    }
   };
+
+  useEffect(() => {
+    fetchUserData();
+  }, []);
+
+  const logout = async () => {
+    try {
+      await AsyncStorage.removeItem("access_token");
+      navigation.navigate("Login");
+    } catch (error) {
+      console.log("Error logging out:", error);
+    }
+  };
+
+  if (!userData) {
+    return <Text>Loading...</Text>;
+  }
 
   return (
     <View style={styles.container}>
@@ -44,7 +70,10 @@ const Profile = () => {
       </View>
 
       <View style={styles.buttonContainer}>
-        <Button title="Back" onPress={() => navigation.navigate("Home")} />
+        <Button title="Back" onPress={() => navigation.goBack()} />
+      </View>
+      <View style={styles.buttonContainer}>
+        <Button title="Logout" onPress={logout} />
       </View>
     </View>
   );
@@ -62,6 +91,7 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: "bold",
     marginBottom: 20,
+    textAlign: "center",
   },
   card: {
     backgroundColor: "#FFFFFF",
@@ -90,4 +120,3 @@ const styles = StyleSheet.create({
 });
 
 export default Profile;
-
