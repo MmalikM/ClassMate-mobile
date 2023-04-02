@@ -2,7 +2,9 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
 import { loggedIn } from "./actionType";
 
-const baseUrl = "https://e7e4-120-188-38-174.ap.ngrok.io/students/";
+// const baseUrl = "https://e7e4-120-188-38-174.ap.ngrok.io/students/";
+const baseUrl = "http://localhost:3000/students/"
+
 
 export function isLoggedIn(payload) {
   return {
@@ -45,6 +47,23 @@ export const register = (input) => {
       return data;
     } catch (error) {
       throw error;
+    }
+  };
+};
+
+
+export const logout = () => {
+  return async (dispatch) => {
+    try {
+      dispatch(loginLoading(true));
+
+      await AsyncStorage.clear();
+      dispatch(isLoggedIn(false));
+
+      dispatch(loginLoading(false));
+    } catch (err) {
+      dispatch(loginLoading(false));
+      throw err;
     }
   };
 };

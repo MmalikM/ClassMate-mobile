@@ -132,7 +132,7 @@ export default function Login() {
           onPress={() => submitRegister()}
         >
           <Text style={styles.registerButtonText}>Register</Text>
-        </TouchableOpacity>
+        </TouchableOpacity >
         <Text onPress={() => navigation.goBack()} style={styles.backButtonText}>
           Back
         </Text>
