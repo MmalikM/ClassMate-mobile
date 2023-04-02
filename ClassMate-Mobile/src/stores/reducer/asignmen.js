@@ -1,4 +1,4 @@
-const initialState = { asignmens: [], loadingAsignmen: false };
+const initialState = { asignmens: [],detailAsignmen:[], loadingAsignmen: false };
 
 function asignmens(state = initialState, action) {
   switch (action.type) {
@@ -7,6 +7,11 @@ function asignmens(state = initialState, action) {
         ...state,
         asignmens: action.payload,
       };
+      case "fetchAsignmenById":
+        return {
+          ...state,
+          detailAsignmen: action.payload,
+        };
     case "loadingAsignmens":
       return {
         ...state,

@@ -1,4 +1,5 @@
 import { useNavigation } from "@react-navigation/native";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useState } from "react";
 import {
   Button,
@@ -22,7 +23,9 @@ export default function Login() {
   const submitLogin = async () =>{
     try {
       const data = await dispatch(login(email,password))
-      console.log(data.data.access_token);
+      await AsyncStorage.setItem('access_token',data.access_token)
+      const token = await AsyncStorage.getItem('access_token');
+      console.log(token);
       setEmail('')
       setPassword('')
       navigation.navigate('Dashboard')
