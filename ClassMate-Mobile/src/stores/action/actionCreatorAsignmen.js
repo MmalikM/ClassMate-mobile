@@ -7,7 +7,8 @@ import {
   loadingAsignmen,
 } from "./actionType";
 
-const baseUrl = "https://e7e4-120-188-38-174.ap.ngrok.io/students/";
+// const baseUrl = "https://e7e4-120-188-38-174.ap.ngrok.io/students/";
+const baseUrl = "http://localhost:3000/students/"
 
 export const fetchAsignmens = () => {
   return async (dispatch) => {

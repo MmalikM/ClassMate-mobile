@@ -1,5 +1,3 @@
-import { useNavigation } from "@react-navigation/native";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useState } from "react";
 import {
   View,
@@ -13,7 +11,6 @@ import {
 } from "react-native";
 import { useDispatch } from "react-redux";
 import { useNavigation } from "@react-navigation/native";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import { login } from "../stores/action/actionCreatorUser";
 import classmateKecil from "../../assets/classmate-kecil.png";
 

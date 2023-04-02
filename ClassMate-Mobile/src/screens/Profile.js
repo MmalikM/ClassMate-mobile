@@ -2,9 +2,11 @@ import React, { useState, useEffect } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { View, Text, StyleSheet, Button } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { login } from "../../src/stores/action/actionCreatorUser"; // Import the login function
+import { login, logout } from "../../src/stores/action/actionCreatorUser"; // Import the login function
+import { useDispatch } from "react-redux";
 
 const Profile = () => {
+  const dispatch = useDispatch()
   const navigation = useNavigation();
   const [userData, setUserData] = useState(null);
 
@@ -27,14 +29,24 @@ const Profile = () => {
     fetchUserData();
   }, []);
 
-  const logout = async () => {
-    try {
-      await AsyncStorage.removeItem("access_token");
-      navigation.navigate("Login");
-    } catch (error) {
-      console.log("Error logging out:", error);
-    }
-  };
+ async function logoutHandler(){
+  try {
+    await  dispatch(logout())
+    navigation.push("Login");
+  } catch (error) {
+    console.log(error);
+  }
+
+ }
+
+  // const logout = async () => {
+  //   try {
+  //     await AsyncStorage.removeItem("access_token");
+  //     navigation.navigate("Login");
+  //   } catch (error) {
+  //     console.log("Error logging out:", error);
+  //   }
+  // };
 
   if (!userData) {
     return <Text>Loading...</Text>;
@@ -73,7 +85,7 @@ const Profile = () => {
         <Button title="Back" onPress={() => navigation.goBack()} />
       </View>
       <View style={styles.buttonContainer}>
-        <Button title="Logout" onPress={logout} />
+        <Button title="Logout" onPress={()=>logoutHandler()} />
       </View>
     </View>
   );
