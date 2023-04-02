@@ -26,13 +26,7 @@ export default function Tabs() {
               iconName = focused ? "home-sharp" : "home-outline";
             } else if (route.name === "Profile") {
               iconName = focused ? "heart-sharp" : "heart-outline";
-            } else if (route.name === "Login") {
-              iconName = focused ? "basket-sharp" : "basket-outline";
-            } else if (route.name === "Register") {
-              iconName = focused
-                ? "person-circle-sharp"
-                : "person-circle-outline";
-            }
+            } 
             return <Ionicons name={iconName} size={size} color={color} />;
           },
         };
@@ -41,7 +35,7 @@ export default function Tabs() {
 
       <Screen
         name="Dashboard"
-        component={Stacks}
+        component={Dashboard}
         options={{
           headerTitle: () => (
             <Image source={dashboardIcon} style={{ width: 200, height: 50 }} />
@@ -63,31 +57,7 @@ export default function Tabs() {
           },
         }}
       />
-      <Screen
-        name="Login"
-        component={Login}
-        options={{
-          headerTitle: () => (
-            <Image source={dashboardIcon} style={{ width: 200, height: 50 }} />
-          ),
-          headerStyle: {
-            backgroundColor: "#086B1B",
-          },
-        }}
-      />
-      <Screen
-        name="Register"
-        component={Register}
-        options={{
-          headerTitle: () => (
-            <Image source={dashboardIcon} style={{ width: 200, height: 50 }} />
-          ),
-          headerStyle: {
-            backgroundColor: "#086B1B",
-          },
-        }}
-        loader
-      />
+     
     </Navigator>
   );
 }

@@ -1,4 +1,6 @@
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
+import { useEffect, useState } from "react";
 import {
   fetchAsignmen,
   fetchAsignmenById,
@@ -9,8 +11,14 @@ const baseUrl = "http://localhost:3000/students/";
 
 export const fetchAsignmens = () => {
   return async (dispatch) => {
+    const access_token = await AsyncStorage.getItem('access_token');
     try {
-      const { data } = await axios.get(baseUrl + "assignments");
+      console.log(access_token);
+      const { data } = await axios.get(baseUrl + "assignments",{
+        headers:{
+          access_token:access_token
+        }
+      });
       dispatch(fetchAsignmenSuccess(data));
       dispatch(loadingAsignemSucsess());
     } catch (error) {
@@ -21,8 +29,13 @@ export const fetchAsignmens = () => {
 
 export const fetchAsignmensById = (id) => {
   return async (dispatch) => {
+    const access_token = await AsyncStorage.getItem('access_token');
     try {
-      const { data } = await axios.get(baseUrl + "assignments/" + id);
+      const { data } = await axios.get(baseUrl + "assignments/" + id,{
+        headers:{
+          access_token:access_token
+        }
+      });
       dispatch(fetchAsignmenByIdSuccess(data))
       dispatch(loadingAsignemSucsess())
     } catch (error) {

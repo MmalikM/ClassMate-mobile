@@ -18,6 +18,10 @@ export default function Dashboard() {
   const { asignmens } = useSelector((state) => state.asignmens);
   const dispatch = useDispatch();
 
+  function goToDetail(id){
+    navigation.navigate('Detail',{id})
+  }
+
   useEffect(() => {
     dispatch(fetchAsignmens()).catch((error) => console.log(error));
   }, []);
@@ -28,7 +32,7 @@ export default function Dashboard() {
       <ScrollView style={styles.asignmensContainer}>
         {asignmens?.map((asignmen, index) => {
           return (
-            <TouchableOpacity key={index} onPress={()=> navigation.navigate('Detail',{id:asignmen._id})} >
+            <TouchableOpacity key={index} onPress={()=> goToDetail(asignmen._id) } >
               <View  style={styles.card} >
                 <Text style={styles.asignmenName}>{asignmen.name}</Text>
                 <Text style={styles.asignmenClassId}>{asignmen.subject}</Text>

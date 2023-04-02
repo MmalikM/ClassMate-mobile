@@ -35,7 +35,7 @@ export default function DetailAsignmen({route}) {
       <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
         <Text>Detail Asignmen Screen {id}</Text>
         <Text>{JSON.stringify(detailAsignmen)}</Text>
-        <Button title="back" onPress={() => navigation.navigate("Home")} />
+        <Button title="back" onPress={() => navigation.goBack()} />
       </View>
     </View>
   );
