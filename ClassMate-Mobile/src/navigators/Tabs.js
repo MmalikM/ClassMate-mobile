@@ -1,20 +1,21 @@
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import Dashboard from '../screens/Dashboard';
-import Profile from '../screens/Profile';
-import Login from '../screens/Login';
-import Register from '../screens/Register';
-import Stacks from './Stacks'
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import Dashboard from "../screens/Dashboard";
+import Profile from "../screens/Profile";
+import Login from "../screens/Login";
+import Register from "../screens/Register";
+import Stacks from "./Stacks";
 import Ionicons from "react-native-vector-icons/Ionicons";
 
 import dashboardIcon from "../../assets/dashboard-icon.png";
 import profileIcon from "../../assets/profile-icon.png";
 import loginIcon from "../../assets/login-icon.png";
 import registerIcon from "../../assets/register-icon.png";
-import { Image } from 'react-native';
+import { Image } from "react-native";
 
 const { Navigator, Screen } = createBottomTabNavigator();
 
 export default function Tabs() {
+
   return (
     <Navigator
       screenOptions={({ route }) => {
@@ -25,43 +26,38 @@ export default function Tabs() {
               iconName = focused ? "home-sharp" : "home-outline";
             } else if (route.name === "Profile") {
               iconName = focused ? "heart-sharp" : "heart-outline";
-            } else if (route.name === "Login") {
-              iconName = focused ? "basket-sharp" : "basket-outline";
-            } else if (route.name === "Register") {
-              iconName = focused
-                ? "person-circle-sharp"
-                : "person-circle-outline";
-            }
+            } 
             return <Ionicons name={iconName} size={size} color={color} />;
           },
         };
       }}
     >
-      <Screen name="Dashboard" component={Stacks}
+
+      <Screen
+        name="Dashboard"
+        component={Dashboard}
         options={{
-          headerTitle: () => <Image source={dashboardIcon} style={{ width: 200, height: 50 }} />,
+          headerTitle: () => (
+            <Image source={dashboardIcon} style={{ width: 200, height: 50 }} />
+          ),
           headerStyle: {
-            backgroundColor: "#086B1B"
+            backgroundColor: "#086B1B",
           },
-        }}/>
-      <Screen name="Profile" component={Profile} options={{
-          headerTitle: () => <Image source={profileIcon} style={{ width: 200, height: 50 }} />,
+        }}
+      />
+      <Screen
+        name="Profile"
+        component={Profile}
+        options={{
+          headerTitle: () => (
+            <Image source={profileIcon} style={{ width: 200, height: 50 }} />
+          ),
           headerStyle: {
-            backgroundColor: "#086B1B"
+            backgroundColor: "#086B1B",
           },
-        }}/>
-      <Screen name="Login" component={Login} options={{
-          headerTitle: () => <Image source={dashboardIcon} style={{ width: 200, height: 50 }} />,
-          headerStyle: {
-            backgroundColor: "#086B1B"
-          },
-        }}/>
-      <Screen name="Register" component={Register} options={{
-          headerTitle: () => <Image source={dashboardIcon} style={{ width: 200, height: 50 }} />,
-          headerStyle: {
-            backgroundColor: "#086B1B"
-          },
-        }}/>
+        }}
+      />
+     
     </Navigator>
   );
 }

@@ -1,4 +1,5 @@
 import { useNavigation } from "@react-navigation/native";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useState } from "react";
 import {
   Button,
@@ -22,10 +23,11 @@ export default function Login() {
   const submitLogin = async () =>{
     try {
       const data = await dispatch(login(email,password))
-      console.log(data.data.access_token);
+      await AsyncStorage.setItem('access_token',data.access_token)
+      const token = await AsyncStorage.getItem('access_token');
       setEmail('')
       setPassword('')
-      navigation.navigate('Dashboard')
+      navigation.push('Home')
 
     } catch (error) {
       throw error
@@ -60,9 +62,20 @@ export default function Login() {
             margin: 20,
             borderRadius: 15,
           }}
-          onPress={()=> submitLogin()}
+          onPress={()=> submitLogin}
         >
           <Text style={{ color: "#FFFFFF", textAlign: "center" }}>login</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={{
+            backgroundColor: "blue",
+            paddingVertical: 14,
+            margin: 20,
+            borderRadius: 15,
+          }}
+          onPress={()=> navigation.navigate('Register')}
+        >
+          <Text style={{ color: "#FFFFFF", textAlign: "center" }}>register</Text>
         </TouchableOpacity>
       </View>
   

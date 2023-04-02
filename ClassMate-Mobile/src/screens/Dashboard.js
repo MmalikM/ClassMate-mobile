@@ -1,35 +1,46 @@
 import React, { useEffect } from "react";
 import { useNavigation } from "@react-navigation/native";
-import { Button, Text, View, StyleSheet, ScrollView, Image } from "react-native";
+import {
+  Button,
+  Text,
+  View,
+  StyleSheet,
+  ScrollView,
+  Image,
+  TouchableOpacity,
+} from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchAsignmens } from "../stores/action/actionCreatorAsignmen";
 import logo from "../../assets/dashboard-icon.png"; // Update with your logo file name
 
 export default function Dashboard() {
+  const navigation = useNavigation();
   const { asignmens } = useSelector((state) => state.asignmens);
   const dispatch = useDispatch();
+
+  function goToDetail(id){
+    navigation.navigate('Detail',{id})
+  }
 
   useEffect(() => {
     dispatch(fetchAsignmens()).catch((error) => console.log(error));
   }, []);
-  const navigation = useNavigation();
 
   return (
     <View style={styles.container}>
-      <View style={styles.logoContainer}>
-        
-      </View>
+      <View style={styles.logoContainer}></View>
       <ScrollView style={styles.asignmensContainer}>
         {asignmens?.map((asignmen, index) => {
           return (
-            <View key={index} style={styles.card}>
-              <Text style={styles.asignmenName}>{asignmen.name}</Text>
-              <Text style={styles.asignmenClassId}>{asignmen.subject}</Text>
-            </View>
+            <TouchableOpacity key={index} onPress={()=> goToDetail(asignmen._id) } >
+              <View  style={styles.card} >
+                <Text style={styles.asignmenName}>{asignmen.name}</Text>
+                <Text style={styles.asignmenClassId}>{asignmen.subject}</Text>
+              </View>  
+            </TouchableOpacity>
           );
         })}
       </ScrollView>
-     
     </View>
   );
 }

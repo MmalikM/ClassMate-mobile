@@ -1,7 +1,7 @@
 import { NavigationContainer } from '@react-navigation/native';
 import { StyleSheet, Text, View } from 'react-native';
 import { Provider } from 'react-redux';
-import Tabs from './src/navigators/Tabs';
+import Stacks from './src/navigators/Stacks';
 import store from './src/stores';
 
 
@@ -9,7 +9,7 @@ export default function App() {
   return (
     <Provider store={store} >   
      <NavigationContainer> 
-        <Tabs/>
+        <Stacks/>
       </NavigationContainer>
     </Provider>
   );

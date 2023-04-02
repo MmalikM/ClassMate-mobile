@@ -13,6 +13,7 @@ import {
 import { useDispatch } from "react-redux";
 import axios from "axios";
 import { register } from "../stores/action/actionCreatorUser";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function Login() {
   const kelasList = [{id:1,name:'x'},{id:2,name:'xi'},{id:3,name:'xii'}]
@@ -22,7 +23,6 @@ export default function Login() {
   const fetchClass = async () =>{
     const {data} = await axios.get("http://localhost:3000/students/class")
     setListClass(data)
-    console.log(listClass);
   }
 
   const [listClass,setListClass] = useState([])
@@ -39,18 +39,19 @@ export default function Login() {
 
   const submitRegister = async () =>{
     try {
-      const input = {email,name,password,Class:kelas,address}
-      console.log(input);
+      const input = {email,name,password,ClassId:kelas,address}
       const data = await dispatch(register(input))
-      console.log(data.access_token);
       setEmail('')
       setName('')
       setAddress('')
       setKelas('')
       setPassword('')
       setListClass([])
-      navigation.navigate('Dashboard')
-
+      if(data.access_token) {
+        console.log(data.access_token);
+        await AsyncStorage.setItem('access_token',data.access_token)
+        navigation.push('Home')
+      }
     } catch (error) {
       throw error
     }
@@ -119,6 +120,7 @@ export default function Login() {
         >
           <Text style={{ color: "#FFFFFF", textAlign: "center" }}>Register</Text>
         </TouchableOpacity>
+        <Text onPress={()=> navigation.goBack()} > back </Text>
       </View>
   
     </View>
