@@ -7,17 +7,17 @@ import {
   loadingAsignmen,
 } from "./actionType";
 
-const baseUrl = "http://localhost:3000/students/";
+const baseUrl = "https://e7e4-120-188-38-174.ap.ngrok.io/students/";
 
 export const fetchAsignmens = () => {
   return async (dispatch) => {
-    const access_token = await AsyncStorage.getItem('access_token');
+    const access_token = await AsyncStorage.getItem("access_token");
     try {
       console.log(access_token);
-      const { data } = await axios.get(baseUrl + "assignments",{
-        headers:{
-          access_token:access_token
-        }
+      const { data } = await axios.get(baseUrl + "assignments", {
+        headers: {
+          access_token: access_token,
+        },
       });
       dispatch(fetchAsignmenSuccess(data));
       dispatch(loadingAsignemSucsess());
@@ -29,15 +29,15 @@ export const fetchAsignmens = () => {
 
 export const fetchAsignmensById = (id) => {
   return async (dispatch) => {
-    const access_token = await AsyncStorage.getItem('access_token');
+    const access_token = await AsyncStorage.getItem("access_token");
     try {
-      const { data } = await axios.get(baseUrl + "assignments/" + id,{
-        headers:{
-          access_token:access_token
-        }
+      const { data } = await axios.get(baseUrl + "assignments/" + id, {
+        headers: {
+          access_token: access_token,
+        },
       });
-      dispatch(fetchAsignmenByIdSuccess(data))
-      dispatch(loadingAsignemSucsess())
+      dispatch(fetchAsignmenByIdSuccess(data));
+      dispatch(loadingAsignemSucsess());
     } catch (error) {
       throw error;
     }
