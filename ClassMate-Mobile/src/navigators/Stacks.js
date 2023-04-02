@@ -53,12 +53,12 @@ export default function Stacks() {
       <Stack.Screen
         name="Detail"
         component={DetailAsignmen}
-        options={{ headerShown: false }}
+        options={{ headerShown: true }}
       />
       <Stack.Screen
         name="Register"
         component={Register}
-        options={{ headerShown: false }}
+        options={{ headerShown: false, headerTitle:false }}
       />
     </Stack.Navigator>
   );

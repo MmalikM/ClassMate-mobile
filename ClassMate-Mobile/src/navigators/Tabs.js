@@ -38,7 +38,7 @@ export default function Tabs() {
         component={Dashboard}
         options={{
           headerTitle: () => (
-            <Image source={dashboardIcon} style={{ width: 200, height: 50 }} />
+            <Image source={dashboardIcon} style={{ width: 200, height: 43 }} />
           ),
           headerStyle: {
             backgroundColor: "#086B1B",
@@ -50,7 +50,7 @@ export default function Tabs() {
         component={Profile}
         options={{
           headerTitle: () => (
-            <Image source={profileIcon} style={{ width: 200, height: 50 }} />
+            <Image source={profileIcon} style={{ width: 200, height: 43 }} />
           ),
           headerStyle: {
             backgroundColor: "#086B1B",

@@ -22,7 +22,7 @@ export default function DetailAsignmen({ route }) {
   async function getAccessToken() {
     try {
       const token = await AsyncStorage.getItem("access_token");
-      console.log(token);
+      // console.log(token);
       return token;
     } catch (error) {
       console.log(error);

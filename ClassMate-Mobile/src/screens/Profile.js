@@ -4,22 +4,27 @@ import { View, Text, StyleSheet, Button } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { login, logout } from "../../src/stores/action/actionCreatorUser"; // Import the login function
 import { useDispatch } from "react-redux";
+import axios from "axios";
+
+const baseUrl = "http://localhost:3000/students/"
 
 const Profile = () => {
   const dispatch = useDispatch()
   const navigation = useNavigation();
   const [userData, setUserData] = useState(null);
+  const [totalAssignments, setTotalAssingments] = useState(0);
 
   const fetchUserData = async () => {
     try {
-      const token = await AsyncStorage.getItem("access_token");
-      // Use the login function instead of fetch
-      const data = await login("email@example.com", "password");
-      if (data) {
-        setUserData(data);
-      } else {
-        console.log("Error fetching user data");
-      }
+      const access_token = await AsyncStorage.getItem("access_token");
+      console.log(access_token);
+      const {data} = await axios.get(baseUrl+'profile',{
+        headers:{
+          access_token : access_token
+        }
+      })
+      setUserData(data)
+      console.log(userData);
     } catch (error) {
       console.log("Error fetching user data:", error);
     }
@@ -78,7 +83,12 @@ const Profile = () => {
 
       <View style={styles.card}>
         <Text style={styles.label}>Class:</Text>
-        <Text style={styles.value}>{userData.className}</Text>
+        <Text style={styles.value}>{userData.Class.name}</Text>
+      </View>
+
+      <View style={styles.card}>
+        <Text style={styles.label}>Total Assignments:</Text>
+        <Text style={styles.value}>{userData.Assignments}</Text>
       </View>
 
       <View style={styles.buttonContainer}>
