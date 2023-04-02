@@ -13,6 +13,7 @@ import { useDispatch } from "react-redux";
 import { useNavigation } from "@react-navigation/native";
 import { login } from "../stores/action/actionCreatorUser";
 import classmateKecil from "../../assets/classmate-kecil.png";
+import Icon from "react-native-vector-icons/FontAwesome";
 
 export default function Login() {
   const navigation = useNavigation();
@@ -20,6 +21,7 @@ export default function Login() {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
 
   const submitLogin = async () => {
     try {
@@ -54,38 +56,44 @@ export default function Login() {
         }}
       />
       <SafeAreaView style={styles.formContainer}>
-          <TextInput
-            keyboardType="email-address"
-            name="email"
-            style={styles.input}
-            onChangeText={setEmail}
-            placeholder="input email"
-            value={email}
-          />
-          <TextInput
-            name="password"
-            style={styles.input}
-            onChangeText={setPassword}
-            placeholder="input password"
-            keyboardType="numeric"
-            value={password}
-          />
-        </SafeAreaView>
+        <TextInput
+          keyboardType="email-address"
+          name="email"
+          style={styles.input}
+          onChangeText={setEmail}
+          placeholder="input email"
+          value={email}
+        />
+
+        <TextInput
+          name="password"
+          style={styles.input}
+          onChangeText={setPassword}
+          placeholder="input password"
+          secureTextEntry={!showPassword}
+          value={password}
+        />
         <TouchableOpacity
+          style={styles.showHideButton}
+          onPress={() => setShowPassword(!showPassword)}
+        >
+          <Icon name={showPassword ? "eye-slash" : "eye"} size={24} />
+        </TouchableOpacity>
+      </SafeAreaView>
+      <TouchableOpacity
         style={styles.loginButton}
         onPress={() => submitLogin()}
       >
-        <Text style={styles.buttonText}>login</Text>
+        <Text style={styles.buttonText}>Login</Text>
       </TouchableOpacity>
       <TouchableOpacity
         style={styles.registerButton}
         onPress={() => navigation.navigate("Register")}
       >
-        <Text style={styles.buttonText}>register</Text>
+        <Text style={styles.buttonText}>Register</Text>
       </TouchableOpacity>
     </View>
   );
-
 }
 
 const styles = StyleSheet.create({
@@ -95,7 +103,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
   },
   formContainer: {
-    flex: 1,
+    flex: 0.5,
     backgroundColor: "#FFFFFF",
     borderRadius: 10,
     padding: 20,
@@ -106,8 +114,19 @@ const styles = StyleSheet.create({
     elevation: 5,
     marginBottom: 20,
   },
+  inputContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    margin: 12,
+  },
+  showHideButton: {
+    position: "absolute",
+    right: 35,
+    padding: 10,
+    top: 108,
+  },
   input: {
-    height: 40,
+    height: 50,
     margin: 12,
     borderWidth: 1,
     padding: 10,

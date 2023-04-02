@@ -3,8 +3,7 @@ import axios from "axios";
 import { loggedIn } from "./actionType";
 
 // const baseUrl = "https://e7e4-120-188-38-174.ap.ngrok.io/students/";
-const baseUrl = "http://localhost:3000/students/"
-
+const baseUrl = "http://localhost:3000/students/";
 
 export function isLoggedIn(payload) {
   return {
@@ -50,7 +49,6 @@ export const register = (input) => {
     }
   };
 };
-
 
 export const logout = () => {
   return async (dispatch) => {

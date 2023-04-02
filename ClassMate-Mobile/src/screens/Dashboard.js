@@ -46,6 +46,9 @@ export default function Dashboard() {
 }
 
 const styles = StyleSheet.create({
+  dmSerifDisplay: {
+    fontFamily: 'DM Serif Display', // Use the font name without the file extension
+  },
   container: {
     backgroundColor: "#FCFFE7",
     flex: 1,
