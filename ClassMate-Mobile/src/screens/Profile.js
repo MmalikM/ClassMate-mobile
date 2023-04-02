@@ -1,5 +1,6 @@
 import React from 'react';
 import { useNavigation } from "@react-navigation/native";
+
 import { View, Text, StyleSheet, Button } from "react-native";
 
 const Profile = () => {
@@ -89,3 +90,4 @@ const styles = StyleSheet.create({
 });
 
 export default Profile;
+
