@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const baseUrl = "http://localhost:3000/students/";
+const baseUrl = " https://52c1-139-228-76-114.ap.ngrok.io/students/";
 
 export const login = (email, password) => {
   return async () => {

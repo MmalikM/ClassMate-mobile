@@ -148,7 +148,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
   },
   formContainer: {
-    flex: 0.9, // Reduce the flex value to make the white form smaller
+    flex: 0.5, 
     backgroundColor: "#FFFFFF",
     borderRadius: 10,
     padding: 20,
@@ -157,9 +157,10 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
     elevation: 5,
+    justifyContent: "center"
   },
   input: {
-    height: 40,
+    height: 50,
     margin: 12,
     borderWidth: 1,
     padding: 10,
@@ -169,6 +170,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     paddingHorizontal: 20,
+    marginTop: 40,
   },
   registerButton: {
     backgroundColor: "blue",
