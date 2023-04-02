@@ -1,5 +1,5 @@
 import { useNavigation } from "@react-navigation/native";
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useState } from "react";
 import {
   Button,
@@ -15,24 +15,27 @@ import { login } from "../stores/action/actionCreatorUser";
 
 export default function Login() {
   const navigation = useNavigation();
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const submitLogin = async () =>{
+  const submitLogin = async () => {
     try {
-      const data = await dispatch(login(email,password))
-      await AsyncStorage.setItem('access_token',data.access_token)
-      const token = await AsyncStorage.getItem('access_token');
-      setEmail('')
-      setPassword('')
-      navigation.push('Home')
+      // const data = await dispatch(login(email,password))
+      // await AsyncStorage.setItem('access_token',data.access_token)
+      // const token = await AsyncStorage.getItem('access_token');
+      // setEmail('')
+      // setPassword('')
 
+      await dispatch(login(email, password));
+      navigation.push("Home");
+
+      console.log({ email, password });
     } catch (error) {
-      throw error
+      console.log(error.response.data);
     }
-  }
+  };
 
   return (
     <View style={[styles.container]}>
@@ -62,7 +65,7 @@ export default function Login() {
             margin: 20,
             borderRadius: 15,
           }}
-          onPress={()=> submitLogin}
+          onPress={() => submitLogin()}
         >
           <Text style={{ color: "#FFFFFF", textAlign: "center" }}>login</Text>
         </TouchableOpacity>
@@ -73,12 +76,13 @@ export default function Login() {
             margin: 20,
             borderRadius: 15,
           }}
-          onPress={()=> navigation.navigate('Register')}
+          onPress={() => navigation.navigate("Register")}
         >
-          <Text style={{ color: "#FFFFFF", textAlign: "center" }}>register</Text>
+          <Text style={{ color: "#FFFFFF", textAlign: "center" }}>
+            register
+          </Text>
         </TouchableOpacity>
       </View>
-  
     </View>
   );
 }
