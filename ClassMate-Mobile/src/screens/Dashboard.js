@@ -32,10 +32,10 @@ export default function Dashboard() {
       <ScrollView style={styles.asignmensContainer}>
         {asignmens?.map((asignmen, index) => {
           return (
-            <TouchableOpacity key={index} onPress={()=> goToDetail(asignmen._id) } >
+            <TouchableOpacity key={index} onPress={()=> goToDetail(asignmen?._id) } >
               <View  style={styles.card} >
-                <Text style={styles.asignmenName}>{asignmen.name}</Text>
-                <Text style={styles.asignmenClassId}>{asignmen.subject}</Text>
+                <Text style={styles.asignmenName}>{asignmen?.Assignment.name}</Text>
+                <Text style={styles.asignmenClassId}>{asignmen?.Assignment.subject}</Text>
               </View>  
             </TouchableOpacity>
           );
