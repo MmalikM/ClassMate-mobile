@@ -13,7 +13,7 @@ import { useDispatch } from "react-redux";
 import { useNavigation } from "@react-navigation/native";
 import { login } from "../stores/action/actionCreatorUser";
 import classmateKecil from "../../assets/classmate-kecil.png";
-import Icon from "react-native-vector-icons/FontAwesome";
+// import Icon from "react-native-vector-icons/FontAwesome";
 
 export default function Login() {
   const navigation = useNavigation();
@@ -77,7 +77,7 @@ export default function Login() {
           style={styles.showHideButton}
           onPress={() => setShowPassword(!showPassword)}
         >
-          <Icon name={showPassword ? "eye-slash" : "eye"} size={24} />
+          {/* <Icon name={showPassword ? "eye-slash" : "eye"} size={24} /> */}
         </TouchableOpacity>
       </SafeAreaView>
       <TouchableOpacity
