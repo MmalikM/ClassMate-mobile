@@ -23,8 +23,8 @@ const Profile = () => {
           access_token : access_token
         }
       })
+      setTotalAssingments(data.Class.Assignments.length);
       setUserData(data)
-      console.log(userData);
     } catch (error) {
       console.log("Error fetching user data:", error);
     }
@@ -88,7 +88,7 @@ const Profile = () => {
 
       <View style={styles.card}>
         <Text style={styles.label}>Total Assignments:</Text>
-        <Text style={styles.value}>{userData.Assignments}</Text>
+        <Text style={styles.value}>{totalAssignments}</Text>
       </View>
 
       <View style={styles.buttonContainer}>
