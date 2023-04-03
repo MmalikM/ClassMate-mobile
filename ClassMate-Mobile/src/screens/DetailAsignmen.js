@@ -1,14 +1,17 @@
 import { useNavigation } from "@react-navigation/native";
-import { useEffect } from "react";
-import { Button, Text, View, StyleSheet } from "react-native";
+import { useEffect, useState } from "react";
+import { Button, Text, View, StyleSheet, Platform } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchAsignmensById } from "../stores/action/actionCreatorAsignmen";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Image } from "react-native";
 import classmateKecil from "../../assets/classmate-kecil.png";
 import { Dimensions } from "react-native";
+import * as ImagePicker from 'expo-image-picker';
+import Constants from 'expo-constants';
 
 export default function DetailAsignmen({ route }) {
+  const [image,setImage] = useState(null)
   const { detailAsignmen } = useSelector((state) => state.asignmens);
   const { id } = route.params;
   const dispatch = useDispatch();
@@ -19,6 +22,7 @@ export default function DetailAsignmen({ route }) {
 ; // The original height (50) divided by the original width (200)
   const newHeight = screenWidth * aspectRatio;
 
+
   async function getAccessToken() {
     try {
       const token = await AsyncStorage.getItem("access_token");
@@ -26,6 +30,30 @@ export default function DetailAsignmen({ route }) {
       return token;
     } catch (error) {
       console.log(error);
+    }
+  }
+// upload image
+
+
+  useEffect(async ()=>{
+    if(Platform.OS !== 'web'){
+      const {status} = await ImagePicker.requestMediaLibraryPermissionsAsync()
+      if (status !== 'granted') console.log("permition denied");
+    }
+  },[])
+
+  const pickImage = async ()=>{
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      allowsEditing: true,
+      aspect: [4, 3],
+      quality: 1,
+    });
+
+    console.log(result);
+
+    if (!result.canceled) {
+      setImage(result.assets[0].uri);
     }
   }
 
@@ -37,6 +65,7 @@ export default function DetailAsignmen({ route }) {
   if (!detailAsignmen || !detailAsignmen.ClassId) {
     return <Text>Loading...</Text>;
   }
+console.log(image);
 
   return (
     <View style={styles.container}>
@@ -65,6 +94,10 @@ export default function DetailAsignmen({ route }) {
         </Text>
       </View>
       <Button title="Back" onPress={() => navigation.goBack()} />
+      <View style={styles.buttonContainer}>
+        <Button title="upload file" onPress={pickImage}/>
+        {image && <Image source={{uri:image}} style={{width:200, height:200}} />}
+      </View>
     </View>
   );
 }
