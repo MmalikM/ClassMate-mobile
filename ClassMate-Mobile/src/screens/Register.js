@@ -36,6 +36,7 @@ export default function Login() {
   const [kelas, setKelas] = useState("");
   const [address, setAddress] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
 
   useEffect(() => {
     fetchClass();
@@ -80,13 +81,16 @@ export default function Login() {
           <Image source={require('../../assets/Classmate.png')} style={{height:150, width:150}}/>
         </View>
       <SafeAreaView style={styles.formContainer}>
-        <TextInput
-          name="name"
-          style={styles.input}
-          onChangeText={setName}
-          placeholder="input name"
-          value={name}
-        />
+        <View style={styles.input} >
+        <Text><Icon name={'user-tie'} size={30} color={"#bdbdbd"} style={{elevation:5}} /></Text>
+          <TextInput
+            name="name"
+            style={{marginHorizontal:20, elevation:5}}
+            onChangeText={setName}
+            placeholder="input name"
+            value={name}
+          />
+        </View>
         <View style={styles.input} >
             <Text><Icon name={'envelope'} size={30} color={"#bdbdbd"} style={{elevation:5}} /></Text>
             <TextInput
@@ -97,23 +101,39 @@ export default function Login() {
               placeholder="input email"
               value={email}
               />
-          </View>
+        </View>
+        <View style={styles.input} >
+        <Text><Icon name={'lock'} size={30} color={"#bdbdbd"} style={{elevation:5}} /></Text>
+        <TouchableOpacity
+            style={{marginLeft:10}}
+            onPress={() => setShowPassword(!showPassword)}
+            >
+              <Text>
+                <Icon name={showPassword ? "eye-slash" : "eye"} size={24} />
+              </Text>
+          </TouchableOpacity>
         <TextInput
           name="password"
-          style={styles.input}
+          style={{marginHorizontal:20, elevation:5}}
           onChangeText={setPassword}
           placeholder="input password"
           keyboardType="numeric"
+          secureTextEntry={!showPassword}
           value={password}
         />
+        </View>
+        
+        <View style={styles.input} >
+        <Text><Icon name={'house-user'} size={30} color={"#bdbdbd"} style={{elevation:5}} /></Text>
         <TextInput
           name="address"
-          style={styles.input}
+          style={{marginHorizontal:20, elevation:5}}
           onChangeText={setAddress}
           placeholder="input address"
           value={address}
         />
-        <View style={{ alignItems: "center", justifyContent: "center" }}>
+        </View>
+        <View style={{ alignItems: "center", justifyContent: "center", marginTop:25 }}>
           <SelectDropdown
             defaultButtonText="Choose Class"
             dropdownStyle={{ borderColor: "red" }}
