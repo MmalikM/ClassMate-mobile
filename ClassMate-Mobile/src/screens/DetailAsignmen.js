@@ -35,14 +35,23 @@ export default function DetailAsignmen({ route }) {
 // upload image
 
 
-  useEffect(async ()=>{
-    if(Platform.OS !== 'web'){
-      const {status} = await ImagePicker.requestMediaLibraryPermissionsAsync()
-      if (status !== 'granted') console.log("permition denied");
-    }
-  },[])
+  // useEffect( ()=>{
+  //   getImage()
+  // },[])
+
+  // const getImage = async () =>{
+  //   try {
+  //     if(Platform.OS !== 'web'){
+  //       const {status} = await ImagePicker.requestMediaLibraryPermissionsAsync()
+  //       if (status !== 'granted') console.log("permition denied");
+  //     }
+  //   } catch (error) {
+  //     console.log(error); 
+  //   }
+  // }
 
   const pickImage = async ()=>{
+    console.log("masuk bro");
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.All,
       allowsEditing: true,
@@ -78,7 +87,7 @@ console.log(image);
           marginBottom: 20,
         }}
       />
-      <Text style={styles.title}>Detail Asignmen Screen {id}</Text>
+      <Text style={styles.title}>{detailAsignmen.name}</Text>
       <View style={styles.card}>
         <Text style={styles.cardTitle}>{detailAsignmen.name}</Text>
         <Text style={styles.cardText}>Subject: {detailAsignmen.subject}</Text>

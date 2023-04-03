@@ -149,18 +149,13 @@ export default function Login() {
             }}
           />
         </View>
-      </SafeAreaView>
-      <View style={styles.buttonContainer}>
         <TouchableOpacity
           style={styles.registerButton}
           onPress={() => submitRegister()}
         >
           <Text style={styles.registerButtonText}>Register</Text>
         </TouchableOpacity >
-        <Text onPress={() => navigation.goBack()} style={styles.backButtonText}>
-          Back
-        </Text>
-      </View>
+      </SafeAreaView>
     </View>
   );
 }
@@ -194,32 +189,17 @@ const styles = StyleSheet.create({
     marginTop:20,
     marginHorizontal:10
   },
-  buttonContainer: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    paddingHorizontal: 20,
-    marginTop: 40,
-  },
   registerButton: {
-    backgroundColor: "blue",
+    backgroundColor: "#006d77",
     paddingVertical: 14,
+    marginTop:15 ,
+    marginHorizontal: 100,
     borderRadius: 15,
-    flex: 1,
-    marginRight: 10,
   },
   registerButtonText: {
     color: "#FFFFFF",
     textAlign: "center",
+    fontWeight: 'bold'
   },
-  backButtonText: {
-    color: "#FFFFFF",
-    flex: 1,
-    textAlign: "center",
-    backgroundColor: "blue",
-    paddingVertical: 14,
-    borderRadius: 15,
-    flex: 1,
-    marginRight: 10,
-  },
+
 });

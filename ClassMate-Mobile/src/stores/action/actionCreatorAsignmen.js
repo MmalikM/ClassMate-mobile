@@ -15,7 +15,7 @@ export const fetchAsignmens = () => {
     const access_token = await AsyncStorage.getItem("access_token");
     try {
       console.log(access_token);
-      const { data } = await axios.get(baseUrl + "assignments", {
+      const { data } = await axios.get(baseUrl + "answers", {
         headers: {
           access_token: access_token,
         },
