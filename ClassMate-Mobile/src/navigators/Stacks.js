@@ -58,7 +58,7 @@ export default function Stacks() {
       <Stack.Screen
         name="Register"
         component={Register}
-        options={{ headerShown: false, headerTitle:false }}
+        options={{ headerShown: true, headerTitle:false }}
       />
     </Stack.Navigator>
   );

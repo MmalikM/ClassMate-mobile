@@ -16,13 +16,11 @@ import { register } from "../stores/action/actionCreatorUser";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import classmateKecil from "../../assets/classmate-kecil.png";
 import { Dimensions } from "react-native";
+import Icon from "react-native-vector-icons/FontAwesome5";
+
 
 export default function Login() {
-  const kelasList = [
-    { id: 1, name: "x" },
-    { id: 2, name: "xi" },
-    { id: 3, name: "xii" },
-  ];
+
   const navigation = useNavigation();
   const dispatch = useDispatch();
 
@@ -38,6 +36,7 @@ export default function Login() {
   const [kelas, setKelas] = useState("");
   const [address, setAddress] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
 
   useEffect(() => {
     fetchClass();
@@ -69,7 +68,7 @@ export default function Login() {
 
   return (
     <View style={[styles.container]}>
-      <Image
+      {/* <Image
         source={classmateKecil}
         style={{
           width: screenWidth,
@@ -77,39 +76,64 @@ export default function Login() {
           alignSelf: "center",
           marginBottom: 20,
         }}
-      />
+      /> */}
+       <View style={{justifyContent:'center', alignItems :'center',marginTop:30, marginBottom:20}} >
+          <Image source={require('../../assets/Classmate.png')} style={{height:150, width:150}}/>
+        </View>
       <SafeAreaView style={styles.formContainer}>
-        <TextInput
-          name="name"
-          style={styles.input}
-          onChangeText={setName}
-          placeholder="input name"
-          value={name}
-        />
-        <TextInput
-          keyboardType="email-address"
-          name="email"
-          style={styles.input}
-          onChangeText={setEmail}
-          placeholder="input email"
-          value={email}
-        />
+        <View style={styles.input} >
+        <Text><Icon name={'user-tie'} size={30} color={"#bdbdbd"} style={{elevation:5}} /></Text>
+          <TextInput
+            name="name"
+            style={{marginHorizontal:20, elevation:5}}
+            onChangeText={setName}
+            placeholder="input name"
+            value={name}
+          />
+        </View>
+        <View style={styles.input} >
+            <Text><Icon name={'envelope'} size={30} color={"#bdbdbd"} style={{elevation:5}} /></Text>
+            <TextInput
+            style={{marginHorizontal:20, elevation:5}}
+              keyboardType="email-address"
+              name="email"
+              onChangeText={setEmail}
+              placeholder="input email"
+              value={email}
+              />
+        </View>
+        <View style={styles.input} >
+        <Text><Icon name={'lock'} size={30} color={"#bdbdbd"} style={{elevation:5}} /></Text>
+        <TouchableOpacity
+            style={{marginLeft:10}}
+            onPress={() => setShowPassword(!showPassword)}
+            >
+              <Text>
+                <Icon name={showPassword ? "eye-slash" : "eye"} size={24} />
+              </Text>
+          </TouchableOpacity>
         <TextInput
           name="password"
-          style={styles.input}
+          style={{marginHorizontal:20, elevation:5}}
           onChangeText={setPassword}
           placeholder="input password"
           keyboardType="numeric"
+          secureTextEntry={!showPassword}
           value={password}
         />
+        </View>
+        
+        <View style={styles.input} >
+        <Text><Icon name={'house-user'} size={30} color={"#bdbdbd"} style={{elevation:5}} /></Text>
         <TextInput
           name="address"
-          style={styles.input}
+          style={{marginHorizontal:20, elevation:5}}
           onChangeText={setAddress}
           placeholder="input address"
           value={address}
         />
-        <View style={{ alignItems: "center", justifyContent: "center" }}>
+        </View>
+        <View style={{ alignItems: "center", justifyContent: "center", marginTop:25 }}>
           <SelectDropdown
             defaultButtonText="Choose Class"
             dropdownStyle={{ borderColor: "red" }}
@@ -143,12 +167,13 @@ export default function Login() {
 
 const styles = StyleSheet.create({
   container: {
+    flexDirection: "column",
     backgroundColor: "#FCFFE7",
     flex: 1,
     paddingHorizontal: 20,
   },
   formContainer: {
-    flex: 0.5, 
+    flex: 0.75, 
     backgroundColor: "#FFFFFF",
     borderRadius: 10,
     padding: 20,
@@ -157,13 +182,17 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
     elevation: 5,
-    justifyContent: "center"
+    justifyContent: "center",
   },
   input: {
+    flexDirection:"row",
+    borderRadius:15,
     height: 50,
-    margin: 12,
-    borderWidth: 1,
+    borderColor:"green",
+    borderWidth: 2,
     padding: 10,
+    marginTop:20,
+    marginHorizontal:10
   },
   buttonContainer: {
     flexDirection: "row",

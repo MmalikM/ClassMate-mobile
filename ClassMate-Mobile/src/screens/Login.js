@@ -1,52 +1,43 @@
+import { useNavigation } from "@react-navigation/native";
 import { useState } from "react";
 import {
-  View,
+  Button,
+  Image,
   Text,
+  View,
   StyleSheet,
   SafeAreaView,
   TextInput,
   TouchableOpacity,
-  Image,
-  Dimensions,
 } from "react-native";
 import { useDispatch } from "react-redux";
-import { useNavigation } from "@react-navigation/native";
 import { login } from "../stores/action/actionCreatorUser";
 import classmateKecil from "../../assets/classmate-kecil.png";
-// import Icon from "react-native-vector-icons/FontAwesome";
+import Icon from "react-native-vector-icons/FontAwesome5";
 
 export default function Login() {
   const navigation = useNavigation();
-  const dispatch = useDispatch();
-
+  const dispatch = useDispatch()
+  const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [showPassword, setShowPassword] = useState(false);
 
-  const submitLogin = async () => {
+  const submitLogin = async () =>{
     try {
-      // const data = await dispatch(login(email,password))
-      // await AsyncStorage.setItem('access_token',data.access_token)
-      // const token = await AsyncStorage.getItem('access_token');
-      // setEmail('')
-      // setPassword('')
+      const data = await dispatch(login(email,password))
+      console.log(data.data.access_token);
+      setEmail('')
+      setPassword('')
+      navigation.navigate('Dashboard')
 
-      await dispatch(login(email, password));
-      navigation.push("Home");
-
-      console.log({ email, password });
     } catch (error) {
-      console.log(error.response.data);
+      throw error
     }
-  };
-
-  const screenWidth = Dimensions.get("window").width;
-  const aspectRatio = 0.15;
-  const newHeight = screenWidth * aspectRatio;
+  }
 
   return (
     <View style={styles.container}>
-      <Image
+      {/* <Image
         source={classmateKecil}
         style={{
           width: screenWidth,
@@ -54,56 +45,74 @@ export default function Login() {
           alignSelf: "center",
           marginBottom: 20,
         }}
-      />
+      /> */}
+        <View style={{justifyContent:'center', alignItems :'center',marginTop:80, marginBottom:20}} >
+          <Image source={require('../../assets/Classmate.png')} style={{height:150, width:150}}/>
+        </View>
       <SafeAreaView style={styles.formContainer}>
-        <TextInput
-          keyboardType="email-address"
-          name="email"
-          style={styles.input}
-          onChangeText={setEmail}
-          placeholder="input email"
-          value={email}
-        />
-
-        <TextInput
-          name="password"
-          style={styles.input}
-          onChangeText={setPassword}
-          placeholder="input password"
-          secureTextEntry={!showPassword}
-          value={password}
-        />
+        <View style={styles.input} >
+          <Text><Icon name={'envelope'} size={30} color={"#bdbdbd"} style={{elevation:5}} /></Text>
+          <TextInput
+          style={{marginHorizontal:20, elevation:5}}
+            keyboardType="email-address"
+            name="email"
+            onChangeText={setEmail}
+            placeholder="input email"
+            value={email}
+            />
+        </View>
+        <View style={styles.input} >
+          <Text><Icon name={'lock'} size={30} color={"#bdbdbd"} /></Text>
+          <TouchableOpacity
+            style={{marginLeft:10}}
+            onPress={() => setShowPassword(!showPassword)}
+            >
+              <Text>
+                <Icon name={showPassword ? "eye-slash" : "eye"} size={24} />
+              </Text>
+          </TouchableOpacity>
+          <TextInput
+            name="password"
+             style={{marginHorizontal:20}}
+            onChangeText={setPassword}
+            placeholder="input password"
+            secureTextEntry={!showPassword}
+            value={password}
+            />
+        </View>
         <TouchableOpacity
-          style={styles.showHideButton}
-          onPress={() => setShowPassword(!showPassword)}
-        >
-          {/* <Icon name={showPassword ? "eye-slash" : "eye"} size={24} /> */}
+          style={styles.loginButton}
+          onPress={() => submitLogin()}
+          >
+          <Text style={styles.buttonText}>Login</Text>
         </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.loginButton}
+          onPress={() => submitLogin()}
+          >
+          <Text style={styles.buttonText}>googel Login</Text>
+        </TouchableOpacity>
+        <View style={{flexDirection:"row", justifyContent:"center" }} >
+            <Text style={styles.registerButton}>Don't have account? </Text>
+          <TouchableOpacity>
+          <Text style={styles.registerText} onPress={() => navigation.navigate("Register")}>Register</Text>
+          </TouchableOpacity>
+        </View>
       </SafeAreaView>
-      <TouchableOpacity
-        style={styles.loginButton}
-        onPress={() => submitLogin()}
-      >
-        <Text style={styles.buttonText}>Login</Text>
-      </TouchableOpacity>
-      <TouchableOpacity
-        style={styles.registerButton}
-        onPress={() => navigation.navigate("Register")}
-      >
-        <Text style={styles.buttonText}>Register</Text>
-      </TouchableOpacity>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
+    flexDirection: "column",
     backgroundColor: "#FCFFE7",
     flex: 1,
     paddingHorizontal: 20,
   },
   formContainer: {
-    flex: 0.5,
+    justifyContent:"center",
+    flex: 0.6,
     backgroundColor: "#FFFFFF",
     borderRadius: 10,
     padding: 20,
@@ -112,39 +121,46 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
     elevation: 5,
-    marginBottom: 20,
   },
   inputContainer: {
     flexDirection: "row",
     alignItems: "center",
     margin: 12,
   },
-  showHideButton: {
-    position: "absolute",
-    right: 35,
-    padding: 10,
-    top: 108,
-  },
   input: {
+    flexDirection:"row",
+    borderRadius:15,
     height: 50,
-    margin: 12,
-    borderWidth: 1,
+    borderColor:"green",
+    borderWidth: 2,
     padding: 10,
+    marginTop:20,
+    marginHorizontal:10
   },
   loginButton: {
-    backgroundColor: "blue",
+    backgroundColor: "#006d77",
     paddingVertical: 14,
-    marginBottom: 10,
+    marginTop:15 ,
+    marginHorizontal: 100,
     borderRadius: 15,
   },
+  registerText: {
+    color: "#4895ef",
+    marginVertical: 14,
+    marginBottom: 20,
+    borderRadius: 15,
+    fontStyle:'italic',
+    fontWeight:'bold'
+  },
   registerButton: {
-    backgroundColor: "blue",
-    paddingVertical: 14,
+    color: "black",
+    marginVertical: 14,
     marginBottom: 20,
     borderRadius: 15,
   },
   buttonText: {
     color: "#FFFFFF",
     textAlign: "center",
+    fontWeight: 'bold'
   },
 });
