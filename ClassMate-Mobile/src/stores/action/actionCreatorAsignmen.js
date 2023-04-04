@@ -7,8 +7,9 @@ import {
   loadingAsignmen,
 } from "./actionType";
 
-// const baseUrl = "https://e7e4-120-188-38-174.ap.ngrok.io/students/";
-const baseUrl = "http://localhost:3000/students/";
+const baseUrl =
+  "https://ff1d-2001-448a-1129-129b-b019-1ebb-37b9-9dd6.ap.ngrok.io/students/";
+// const baseUrl = "http://localhost:3000/students/";
 
 export const fetchAsignmens = () => {
   return async (dispatch) => {
@@ -71,12 +72,11 @@ export const uploadImage = async (image, id) => {
         "Content-Type": "multipart/form-data",
         access_token: access_token,
       },
-    })
+    });
     console.log("response :", data);
   } catch (error) {
     console.log(error);
   }
-
 };
 
 export const fetchAsignmenSuccess = (payload) => {
