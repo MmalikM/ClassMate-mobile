@@ -11,6 +11,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../stores/action/actionCreatorUser";
 import { useEffect } from "react";
 import { fetchAsignmens } from "../stores/action/actionCreatorAsignmen";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 
 
@@ -27,8 +28,6 @@ export default function Statistik() {
       }, []);
 
 
-    useEffect
-
   const data = {
     labels: ["tugas1", "tugas2", "tugas3", "tugas4", "tugas5", "tugas6","tugas7"],
     datasets: [
@@ -42,14 +41,7 @@ console.log(asignmens);
 
   return (
     <View style={styles.container}>
-      <View style={{ flex: 1, backgroundColor: "yellow" }}>
-        <Text>Assigned</Text>
-      </View>
-      <View style={{ flex: 2, backgroundColor: "blue" }}></View>
-      <View style={{ flex: 1, backgroundColor: "pink" }}>
-        <Text>Returned</Text>
-      </View>
-      <View style={{ flex: 2, backgroundColor: "green" }}></View>
+     
       <View style={{ flex: 7, backgroundColor: "#ffffff", marginTop:10 }}>
         <View style={{ flex:1,justifyContent:'center', alignItems:'center'}}>
          <Text  > Score Grafik of your Assignment </Text>

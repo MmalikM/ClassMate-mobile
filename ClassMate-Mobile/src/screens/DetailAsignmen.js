@@ -9,7 +9,7 @@ import {
   TouchableOpacity,
 } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchAsignmensById } from "../stores/action/actionCreatorAsignmen";
+import { fetchAsignmensById, uploadImage } from "../stores/action/actionCreatorAsignmen";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Image } from "react-native";
 import classmateKecil from "../../assets/classmate-kecil.png";
@@ -50,7 +50,7 @@ export default function DetailAsignmen({ route }) {
     console.log(result);
 
     if (!result.canceled) {
-      setImage(result.assets[0].uri);
+      setImage(result.assets[0]);
     }
   };
 
@@ -58,6 +58,10 @@ export default function DetailAsignmen({ route }) {
     dispatch(fetchAsignmensById(id));
     getAccessToken();
   }, []);
+  useEffect(() => {
+    console.log(image);
+    dispatch(uploadImage(image,id));
+  }, [image]);
 
   if (!detailAsignmen || !detailAsignmen?.ClassId) {
     return <Text>Loading...</Text>;
@@ -96,7 +100,7 @@ export default function DetailAsignmen({ route }) {
       </TouchableOpacity>
       <View style={styles.imagePos}>
         {image && (
-          <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />
+          <Image source={{ uri: image.uri }} style={{ width: 200, height: 200 }} />
         )}
       </View>
     </View>

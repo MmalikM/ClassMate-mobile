@@ -41,44 +41,43 @@ export const fetchAsignmensById = (idAssignmet) => {
       dispatch(fetchAsignmenByIdSuccess(data));
       dispatch(loadingAsignemSucsess());
     } catch (error) {
-      console.log(error); 
+      console.log(error);
     }
   };
 };
 
-// export const uploadImage = (image,id) => {
-//   const access_token =  AsyncStorage.getItem("access_token");
-//   console.log(access_token);
-//   let data = {
-//     sale_id: 1,
-//     note_type_id: 4,
-//     description: "test",
-//     note_content_item: " hi from broker hub",
-//   };
-//   const formData = new FormData();
-//   formData.append("data", JSON.stringify(data));
-//   formData.append("Note", {
-//     uri: image,
-//     type: "image/jpeg",
-//     name: "imagename.jpg",
-//   });
-//   axios({
-//     url: baseUrl+"upload/"+id,
-//     method: "POST",
-//     data: formData,
-//     headers: {
-//       Accept: "application/json",
-//       "Content-Type": "multipart/form-data",
-//       "access_token": "",
-//     },
-//   })
-//     .then(function (response) {
-//       console.log("response :", response);
-//     })
-//     .catch(function (error) {
-//       console.log("error from image :");
-//     });
-// };
+export const uploadImage = async (image, id) => {
+  try {
+    const access_token = await AsyncStorage.getItem("access_token");
+    console.log(access_token);
+    // let data = {
+    //   sale_id: 1,
+    //   note_type_id: 4,
+    //   description: "test",
+    //   note_content_item: " hi from broker hub",
+    // };
+    const formData = new FormData();
+    formData.append("data", JSON.stringify(data));
+    formData.append("image", {
+      uri: image.uri,
+      type: image.type,
+      name: image.fileName,
+    });
+    let { data } = await axios({
+      url: baseUrl + "upload/" + id,
+      method: "POST",
+      data: formData,
+      headers: {
+        "Content-Type": "multipart/form-data",
+        access_token: access_token,
+      },
+    })
+    console.log("response :", data);
+  } catch (error) {
+    console.log(error);
+  }
+
+};
 
 export const fetchAsignmenSuccess = (payload) => {
   return {
