@@ -16,8 +16,11 @@ import classmateKecil from "../../assets/classmate-kecil.png";
 import { Dimensions } from "react-native";
 import * as ImagePicker from "expo-image-picker";
 import Constants from "expo-constants";
+import axios from "axios";
+import * as FileSystem from 'expo-file-system';
 
 export default function DetailAsignmen({ route }) {
+  const URL = "http://localhost:3000/students/upload/"
   const [image, setImage] = useState(null);
   const { detailAsignmen } = useSelector((state) => state.asignmens);
   const { id } = route.params;
@@ -31,33 +34,103 @@ export default function DetailAsignmen({ route }) {
   async function getAccessToken() {
     try {
       const token = await AsyncStorage.getItem("access_token");
-      console.log(token);
       return token;
     } catch (error) {
       console.log(error);
     }
   }
 
+  // const pickImage = async () => {
+  //   // console.log("masuk bro");
+  //   let result = await ImagePicker.launchImageLibraryAsync({
+  //     mediaTypes: ImagePicker.MediaTypeOptions.All,
+  //     allowsEditing: true,
+  //     aspect: [4, 3],
+  //     quality: 1,
+  //   });
+
+  //   console.log(result);
+
+  //   if (!result.canceled) {
+  //     setImage(result.assets[0]);
+  //   }
+  // };
+
   const pickImage = async () => {
-    // console.log("masuk bro");
+    const access_token = await AsyncStorage.getItem("access_token");
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.All,
       allowsEditing: true,
       aspect: [4, 3],
       quality: 1,
+      base64: true,
     });
+  
+    if (!result.cancelled) {
+      // Save the selected image to the app's cache directory
+      const fileUri = FileSystem.cacheDirectory + result.uri.split('/').pop();
+      await FileSystem.writeAsStringAsync(fileUri, result.base64, {
+        encoding: FileSystem.EncodingType.Base64,
+      });
 
-    console.log(result);
-
-    if (!result.canceled) {
       setImage(result.assets[0]);
+      // Create a FormData object and append the image file to it
+      const formData = new FormData();
+      formData.append('image', {
+        uri: fileUri,
+        type: 'image/jpeg',
+        name: 'test.jpg',
+      });
+  
+      // Send a POST request to the server to upload the file
+      axios.post(URL+id, formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+          access_token:access_token
+        },
+      })
+        .then((response) => {
+          console.log('Upload successful!');
+          console.log(response);
+        })
+        .catch((error) => {
+          console.log('Error uploading file:', error);
+        });
     }
   };
 
-  function submitPict(){
-    console.log(image);
-      dispatch(uploadImage(image,id));
-  }
+  // const uploadImage = async () => {
+  //   const access_token = await AsyncStorage.getItem("access_token");
+  //   const formData = new FormData()
+  //   formData.append('image',image)
+  //   console.log(formData);
+  //   const option = {
+  //     headers: {
+  //           'Content-Type': 'multipart/form-data',
+  //           // access_token:access_token
+  //         }
+  //   }
+  //   try {
+  //     const {data} = await axios.post(URL+id, formData,option)
+  //     // await axios({
+  //     //   url: URL + id,
+  //     //   method: 'POST',
+  //     //   body: formData,
+  //     //   headers: {
+  //     //     'Content-Type': 'multipart/form-data',
+  //     //     access_token:access_token
+  //     //   }
+  //     // })
+  //     console.log(data);
+  //     console.log("Uploaded")
+  //   } catch (error) {
+  //     console.log(error)
+  //   }
+  // }
+
+  // function submitPict(){
+  //     dispatch(uploadImage(image,id));
+  // }
 
   useEffect(() => {
     dispatch(fetchAsignmensById(id));
@@ -76,15 +149,7 @@ export default function DetailAsignmen({ route }) {
 
   return (
     <View style={styles.container}>
-      {/* <Image
-        source={classmateKecil}
-        style={{
-          width: screenWidth,
-          height: newHeight,
-          alignSelf: "center",
-          marginBottom: 20,
-        }}
-      /> */}
+     
       <Text style={styles.title}>{detailAsignmen?.name}</Text>
       <View style={styles.card}>
   
@@ -108,7 +173,7 @@ export default function DetailAsignmen({ route }) {
           <Image source={{ uri: image.uri }} style={{ width: 200, height: 200 }} />
         )}
       </View>
-      <TouchableOpacity style={styles.buttonContainer} onPress={submitPict}>
+      <TouchableOpacity style={styles.buttonContainer} onPress={pickImage}>
         <Text style={styles.ButtonText}>submit</Text>
       </TouchableOpacity>
     </View>

@@ -7,9 +7,9 @@ import {
   loadingAsignmen,
 } from "./actionType";
 
-const baseUrl =
-  "https://ff1d-2001-448a-1129-129b-b019-1ebb-37b9-9dd6.ap.ngrok.io/students/";
-// const baseUrl = "http://localhost:3000/students/";
+// const baseUrl =
+  // "https://ff1d-2001-448a-1129-129b-b019-1ebb-37b9-9dd6.ap.ngrok.io/students/";
+const baseUrl = "http://localhost:3000/students/";
 
 export const fetchAsignmens = () => {
   return async (dispatch) => {
@@ -48,7 +48,7 @@ export const fetchAsignmensById = (idAssignmet) => {
 };
 
 export const uploadImage = async (image, id) => {
-  return async (dispatch) => {
+  return async () => {
     try {
       const access_token = await AsyncStorage.getItem("access_token");
       console.log(access_token);
