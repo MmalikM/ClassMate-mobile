@@ -18,8 +18,10 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 export default function Statistik() {
     const dispatch = useDispatch()
     const { asignmens } = useSelector((state) => state.asignmens);
-    let assigned=[]
-    let Returned =[]
+    let max=99
+    let min =60
+    let avg=70
+    let notice = "linggard, blajarnya perlu di tingkatkan"
 
     useEffect(() => {
         dispatch(fetchAsignmens()).catch((error) => console.log(error));
@@ -42,27 +44,64 @@ console.log(asignmens);
   return (
     <View style={styles.container}>
      
-      <View style={{ flex: 7, backgroundColor: "#ffffff", marginTop:10 }}>
+      <View style={{ flex: 2, backgroundColor: "#ffffff", marginTop:10 }}>
         <View style={{ flex:1,justifyContent:'center', alignItems:'center'}}>
          <Text  > Score Grafik of your Assignment </Text>
         </View>
-        <BarChart
-          data={data}
-          width={380}
-          height={200}
-          chartConfig = {{
-            backgroundGradientFrom: "#55a630",
-            backgroundGradientFromOpacity: 1,
-            backgroundGradientTo: "yellow",
-            backgroundGradientToOpacity: 0.5,
-            color: opacity => '#3c096c',
-            strokeWidth: 2, 
-            barPercentage: 0.5,
-            useShadowColorFromDataset: false 
-          }}
-          style={{borderRadius:10, alignSelf:'center', marginVertical:20, flex:7 }}
-        />
+          <BarChart
+            data={data}
+            width={380}
+            height={200}
+            chartConfig = {{
+              backgroundGradientFrom: "#55a630",
+              backgroundGradientFromOpacity: 1,
+              backgroundGradientTo: "yellow",
+              backgroundGradientToOpacity: 0.5,
+              color: opacity => '#3c096c',
+              strokeWidth: 2, 
+              barPercentage: 0.5,
+              useShadowColorFromDataset: false 
+            }}
+            style={{borderRadius:10, alignSelf:'center', marginVertical:20, flex:7 }}
+          />
       </View>
+      <View style={{ flex: 1, backgroundColor: "red", marginTop:10, }}>
+       <View style={{ flex: 1, marginTop:10,}}>
+        <Text>jadi begindang</Text>
+       </View>
+       <View style={{ flex: 2, backgroundColor: "blue", marginTop:10,flexDirection:'row' }}>
+          <View style={{ flex: 1, backgroundColor: "pink" }}>
+            <View style={{flex:1}} > 
+              <Text>minimun</Text>
+             </View>
+            <View style={{flex:4}} > 
+               <Text>{min}</Text>
+            </View>
+          </View>
+          <View style={{ flex: 1, backgroundColor: "orange" }}>
+          <View style={{flex:1}} > 
+              <Text>maximum</Text>
+             </View>
+            <View style={{flex:4}} > 
+              <Text>{max}</Text>
+            </View>
+          </View>     
+       </View>
+      </View>
+      <View style={{ flex: 1, backgroundColor: "red", marginTop:10 }}>
+          <View style={{flex:1}}  >
+            <Text> Avg </Text>
+          </View>
+          <View style={{flex:3}} >
+            <Text>{avg}</Text>
+          </View>
+          <View style={{flex:1}} >
+            <Text>{notice}</Text>
+          </View>
+
+      </View>
+     
+      
      
     </View>
   );
