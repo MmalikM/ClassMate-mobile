@@ -11,6 +11,7 @@ import Register from "../screens/Register";
 import { isLoggedIn } from "../stores/action/actionCreatorUser";
 import Tabs from "./Tabs";
 
+
 const Stack = createNativeStackNavigator();
 
 export default function Stacks() {

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 import {
   Button,
@@ -11,34 +11,45 @@ import {
   FlatList
 } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchAsignmens } from "../stores/action/actionCreatorAsignmen";
+import { fetchAsignmens, fetchReturned } from "../stores/action/actionCreatorAsignmen";
 import CardAssignment from "../components/CardAssignment";
 
-import logo from "../../assets/dashboard-icon.png"; // Update with your logo file name
+
 
 export default function Dashboard() {
+  const [status, setStatus] = useState(true)
   const navigation = useNavigation();
   const { asignmens } = useSelector((state) => state.asignmens);
   const dispatch = useDispatch();
+  
+  function changeStatus (set){
+    if (set) setStatus(set)
+    if(!set) setStatus(set)
+  } 
 
   useEffect(() => {
-    dispatch(fetchAsignmens()).catch((error) => console.log(error));
-  }, []);
+    if(status) {
+      dispatch(fetchAsignmens()).catch((error) => console.log(error));
+    }else{
+      dispatch(fetchReturned()).catch((error) => console.log(error));
+    }
+  }, [status]);
+  // console.log(status);
   // console.log(asignmens);
 
   return (
     <View style={styles.container}>
       <View style={{flex:1, flexDirection:'row'}} >
-        <View style={{flex:1, backgroundColor:'#1B4965',borderRadius:20,margin:5,}}>
+        <TouchableOpacity style={{flex:1, backgroundColor:'#1B4965',borderRadius:20,margin:5}} onPress={()=>changeStatus(true)} >
           <View style={{justifyContent:'center', alignItems:'center', marginVertical:15}} >
-            <Text style={{color:'#ffffff', fontWeight:'bold', fontSize:17}} >Returned</Text> 
+            <Text style={{color:'#ffffff', fontWeight:'bold', fontSize:17}} >Assigned</Text> 
           </View>
-        </View>
-        <View style={{flex:1, backgroundColor:'#62B6CB', borderRadius:20,margin:5}}>
-        <View style={{justifyContent:'center', alignItems:'center', marginVertical:15}} >
-        <Text style={{color:'#ffffff', fontWeight:'bold', fontSize:17}} >Assigned</Text>
-          </View>
-        </View>
+        </TouchableOpacity>
+        <TouchableOpacity style={{flex:1, backgroundColor:'#62B6CB', borderRadius:20,margin:5}} onPress={()=>changeStatus(false)} > 
+            <View style={{justifyContent:'center', alignItems:'center', marginVertical:15}} >
+            <Text style={{color:'#ffffff', fontWeight:'bold', fontSize:17}} >Returned</Text>
+            </View>
+        </TouchableOpacity>
       </View>
       <View style={styles.logoContainer}>
         <FlatList

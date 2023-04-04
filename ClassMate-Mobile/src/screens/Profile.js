@@ -56,15 +56,6 @@ const Profile = () => {
     }
   }
 
-  // const logout = async () => {
-  //   try {
-  //     await AsyncStorage.removeItem("access_token");
-  //     navigation.navigate("Login");
-  //   } catch (error) {
-  //     console.log("Error logging out:", error);
-  //   }
-  // };
-
   if (!userData) {
     return <Text>Loading...</Text>;
   }
@@ -146,7 +137,7 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     flex: 1,
     padding: 10,
-    backgroundColor: "#FCFFE7",
+    backgroundColor: "#ffffff",
   },
   title: {
     fontSize: 24,

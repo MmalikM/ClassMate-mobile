@@ -55,7 +55,7 @@ console.log(asignmens);
             chartConfig = {{
               backgroundGradientFrom: "#1B4965",
               backgroundGradientFromOpacity: 1,
-              backgroundGradientTo: "62B6CB",
+              backgroundGradientTo: "#62B6CB",
               backgroundGradientToOpacity: 0.5,
               color: opacity => '#ffffff',
               strokeWidth: 2, 
