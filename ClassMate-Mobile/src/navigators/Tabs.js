@@ -11,6 +11,7 @@ import profileIcon from "../../assets/profile-icon.png";
 import loginIcon from "../../assets/login-icon.png";
 import registerIcon from "../../assets/register-icon.png";
 import { Image } from "react-native";
+import Statistik from "../screens/Statistik";
 
 const { Navigator, Screen } = createBottomTabNavigator();
 
@@ -24,9 +25,12 @@ export default function Tabs() {
             let iconName;
             if (route.name === "Dashboard") {
               iconName = focused ? "home-sharp" : "home-outline";
-            } else if (route.name === "Profile") {
+            } else if (route.name === "Statistik") {
+              iconName = focused ? "stats-chart" : "stats-chart-outline";
+            } else if(route.name === "Profile"){
               iconName = focused ? "people-sharp" : "people-outline";
-            } 
+
+            }
             return <Ionicons name={iconName} size={size} color={color} />;
           },
         };
@@ -36,6 +40,18 @@ export default function Tabs() {
       <Screen
         name="Dashboard"
         component={Dashboard}
+        options={{
+          headerTitle: () => (
+            <Image source={dashboardIcon} style={{ width: 200, height: 43 }} />
+          ),
+          headerStyle: {
+            backgroundColor: "#086B1B",
+          },
+        }}
+      />
+      <Screen
+        name="Statistik"
+        component={Statistik}
         options={{
           headerTitle: () => (
             <Image source={dashboardIcon} style={{ width: 200, height: 43 }} />

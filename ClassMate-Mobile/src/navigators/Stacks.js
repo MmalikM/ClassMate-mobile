@@ -20,7 +20,7 @@ export default function Stacks() {
   async function cekStatus() {
     try {
       let cek = await AsyncStorage.getItem("access_token");
-      console.log(cek);
+      // console.log(cek);
       if (cek) dispatch(isLoggedIn(true));
     } catch (error) {
       console.log(error);
@@ -34,7 +34,7 @@ export default function Stacks() {
     isLogged ? navigation.navigate("Home") : navigation.navigate("Login");
   }, [isLogged]);
 
-  console.log(isLogged);
+  // console.log(isLogged);
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
       {isLogged ? (

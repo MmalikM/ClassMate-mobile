@@ -39,10 +39,14 @@ export const login = (email, password) => {
 };
 
 export const register = (input) => {
-  return async () => {
+  return async (dispatch) => {
     try {
-      console.log(input);
+      dispatch(loginLoading(true));
       const { data } = await axios.post(baseUrl + "register", input);
+      await AsyncStorage.setItem("access_token", data.access_token);
+      dispatch(isLoggedIn(true));
+
+      dispatch(loginLoading(false));
       return data;
     } catch (error) {
       throw error;

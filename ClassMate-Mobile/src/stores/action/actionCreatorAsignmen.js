@@ -14,7 +14,7 @@ export const fetchAsignmens = () => {
   return async (dispatch) => {
     const access_token = await AsyncStorage.getItem("access_token");
     try {
-      console.log(access_token);
+      // console.log(access_token);
       const { data } = await axios.get(baseUrl + "answers", {
         headers: {
           access_token: access_token,
@@ -28,11 +28,12 @@ export const fetchAsignmens = () => {
   };
 };
 
-export const fetchAsignmensById = (id) => {
+export const fetchAsignmensById = (idAssignmet) => {
+  // console.log(idAssignmet);
   return async (dispatch) => {
     const access_token = await AsyncStorage.getItem("access_token");
     try {
-      const { data } = await axios.get(baseUrl + "assignments/" + id, {
+      const { data } = await axios.get(baseUrl + "assignments/" + idAssignmet, {
         headers: {
           access_token: access_token,
         },
@@ -40,7 +41,7 @@ export const fetchAsignmensById = (id) => {
       dispatch(fetchAsignmenByIdSuccess(data));
       dispatch(loadingAsignemSucsess());
     } catch (error) {
-      throw error;
+      console.log(error); 
     }
   };
 };
