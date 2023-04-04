@@ -50,6 +50,8 @@ export const uploadImage = async (image, id) => {
   try {
     const access_token = await AsyncStorage.getItem("access_token");
     console.log(access_token);
+    console.log(id);
+    console.log(image);
     // let data = {
     //   sale_id: 1,
     //   note_type_id: 4,

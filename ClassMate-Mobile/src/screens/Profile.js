@@ -80,52 +80,38 @@ const Profile = () => {
           />
         </View>
         <View style={{ustifyContent:"center",alignItems:'center', marginTop:50}} >
-          <Text style={{marginTop:10,fontWeight:"bold", fontSize:18}}>{userData.name}</Text>
-          <Text style={{marginTop:2, fontStyle:'italic' ,fontSize:12}}>{userData.role}</Text>
+          <Text style={{marginTop:10,fontWeight:"bold", fontSize:25}}>{userData.name}</Text>
+          <Text style={{marginTop:2, fontStyle:'italic' ,fontSize:15}}>{userData.role}</Text>
         </View>
         <View style={{marginHorizontal:100}}>
           <View style={{flexDirection:'row', marginTop:30}}>
             <Text><Icon name={'envelope'} size={30} color={"#bdbdbd"} style={{elevation:5}} /></Text>
             <View style={{justifyContent:'center', marginLeft:20}} >
-               <Text >{userData.email}</Text>
+               <Text style={{fontSize:15}} >{userData.email}</Text>
             </View>
           </View>
           <View style={{flexDirection:'row', marginTop:10}} >
             <Text><Icon name={'school'} size={30} color={"#bdbdbd"} style={{elevation:5}} /></Text>
             <View style={{justifyContent:'center', marginLeft:13}} >
-               <Text >{userData.Class.name}</Text>
+               <Text style={{fontSize:15}} >{userData.Class.name}</Text>
             </View>
           </View>
           <View style={{flexDirection:'row', marginTop:10}} >
             <Text><Icon name={'map-marker-alt'} size={30} color={"#bdbdbd"} style={{elevation:5}} /></Text>
             <View style={{justifyContent:'center', marginLeft:25}} >
-               <Text >{userData.address}</Text>
+               <Text style={{fontSize:15}} >{userData.address}</Text>
             </View>
           </View>
           <View style={{flexDirection:'row', marginTop:10}} >
             <Text><Icon name={'list-alt'} size={30} color={"#bdbdbd"} style={{elevation:5}} /></Text>
             <View style={{justifyContent:'center', marginLeft:18}} >
-               <Text >{totalAssignments} Assignments</Text>
+               <Text style={{fontSize:15}} >{totalAssignments} Assignments</Text>
             </View>
           </View>
         </View>
-        <View style={styles.buttonContainer}>
-          <Button title="Logout" onPress={()=>logoutHandler()} />
-        </View>
-        <View style={{flexDirection:'row',marginTop:30,marginHorizontal:20}} >
-          <TouchableOpacity style={{flex:1, justifyContent:'center', alignItems:'center'}} >
-            <Text><Icon name="facebook" size={25} color="#bdbdbd" /></Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={{flex:1, justifyContent:'center', alignItems:'center'}} >
-            <Text><Icon name="instagram" size={25} color="#bdbdbd" /></Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={{flex:1, justifyContent:'center', alignItems:'center'}} >
-            <Text><Icon name="twitter" size={25} color="#bdbdbd" /></Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={{flex:1, justifyContent:'center', alignItems:'center'}} >
-            <Text><Icon name="tiktok" size={25} color="#bdbdbd" /></Text>
-          </TouchableOpacity>
-        </View>
+        <TouchableOpacity style={styles.buttonContainer} onPress={()=>logoutHandler()} >
+          <Text style={styles.buttonText}>Logout</Text>
+        </TouchableOpacity>
       </View>
 
       {/* <View style={styles.buttonContainer}>
@@ -173,7 +159,17 @@ const styles = StyleSheet.create({
     marginBottom: 5,
   },
   buttonContainer: {
-    marginTop: 30,
+    marginTop: 0,
+    backgroundColor: "#62B6CB",
+    paddingVertical: 14,
+    marginTop:15 ,
+    marginHorizontal: 100,
+    borderRadius: 15
+  },
+  buttonText: {
+    color: "#2f3e46",
+    textAlign: "center",
+    fontWeight: 'bold'
   },
 });
 

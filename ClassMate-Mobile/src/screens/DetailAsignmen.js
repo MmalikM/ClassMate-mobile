@@ -54,24 +54,29 @@ export default function DetailAsignmen({ route }) {
     }
   };
 
+  function submitPict(){
+    console.log(image);
+      dispatch(uploadImage(image,id));
+  }
+
   useEffect(() => {
     dispatch(fetchAsignmensById(id));
     getAccessToken();
   }, []);
-  useEffect(() => {
-    console.log(image);
-    dispatch(uploadImage(image,id));
-  }, [image]);
+  // useEffect(() => {
+  //   console.log(image);
+  //   dispatch(uploadImage(image,id));
+  // }, [image]);
 
   if (!detailAsignmen || !detailAsignmen?.ClassId) {
     return <Text>Loading...</Text>;
   }
 
-  console.log(image);
+  // console.log(image);
 
   return (
     <View style={styles.container}>
-      <Image
+      {/* <Image
         source={classmateKecil}
         style={{
           width: screenWidth,
@@ -79,7 +84,7 @@ export default function DetailAsignmen({ route }) {
           alignSelf: "center",
           marginBottom: 20,
         }}
-      />
+      /> */}
       <Text style={styles.title}>{detailAsignmen?.name}</Text>
       <View style={styles.card}>
         <Text style={styles.cardTitle}>{detailAsignmen?.name}</Text>
@@ -103,6 +108,9 @@ export default function DetailAsignmen({ route }) {
           <Image source={{ uri: image.uri }} style={{ width: 200, height: 200 }} />
         )}
       </View>
+      <TouchableOpacity style={styles.buttonContainer} onPress={submitPict}>
+        <Text style={styles.ButtonText}>submit</Text>
+      </TouchableOpacity>
     </View>
   );
 }
@@ -118,6 +126,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     marginBottom: 20,
     textAlign: "center",
+    marginTop:50
   },
   card: {
     backgroundColor: "#FFFFFF",
