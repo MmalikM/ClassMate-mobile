@@ -18,8 +18,10 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 export default function Statistik() {
     const dispatch = useDispatch()
     const { asignmens } = useSelector((state) => state.asignmens);
-    let assigned=[]
-    let Returned =[]
+    let max=99
+    let min =60
+    let avg=70
+    let notice = "linggard, belajarnya perlu di tingkatkan"
 
     useEffect(() => {
         dispatch(fetchAsignmens()).catch((error) => console.log(error));
@@ -42,34 +44,68 @@ console.log(asignmens);
   return (
     <View style={styles.container}>
      
-      <View style={{ flex: 7, backgroundColor: "#ffffff", marginTop:10 }}>
+      <View style={{ flex: 1.5, backgroundColor: "#ffffff", marginTop:10 }}>
         <View style={{ flex:1,justifyContent:'center', alignItems:'center'}}>
-         <Text  > Score Grafik of your Assignment </Text>
+         <Text style={{fontWeight:'bold', fontSize:20}} > Scoring Graph of Your Assignment </Text>
         </View>
-        <BarChart
-          data={data}
-          width={380}
-          height={200}
-          chartConfig = {{
-            backgroundGradientFrom: "#55a630",
-            backgroundGradientFromOpacity: 1,
-            backgroundGradientTo: "yellow",
-            backgroundGradientToOpacity: 0.5,
-            color: opacity => '#3c096c',
-            strokeWidth: 2, 
-            barPercentage: 0.5,
-            useShadowColorFromDataset: false 
-          }}
-          style={{borderRadius:10, alignSelf:'center', marginVertical:20, flex:7 }}
-        />
+          <BarChart
+            data={data}
+            width={380}
+            height={200}
+            chartConfig = {{
+              backgroundGradientFrom: "#1B4965",
+              backgroundGradientFromOpacity: 1,
+              backgroundGradientTo: "62B6CB",
+              backgroundGradientToOpacity: 0.5,
+              color: opacity => '#ffffff',
+              strokeWidth: 2, 
+              barPercentage: 0.5,
+              useShadowColorFromDataset: false 
+            }}
+            style={{borderRadius:10, alignSelf:'center', marginVertical:20, flex:7 }}
+          />
+          <Text></Text>
       </View>
-     
+      <View style={{ flex: 1, marginTop:10, }}>
+      
+       <View style={{ flex: 2, marginTop:10,flexDirection:'row' }}>
+          <View style={{ flex: 1, backgroundColor: "#BEE9E8", marginHorizontal:5,borderRadius:20 }}>
+            <View style={{flex:1, justifyContent:'center', alignItems:'center'}} > 
+              <Text style={{fontWeight:'bold', fontSize:20,fontStyle:'italic' }} >Min Score</Text>
+             </View>
+            <View style={{flex:3,justifyContent:'center', alignItems:'center'}} > 
+               <Text style={{fontWeight:'bold', fontSize:70 }}>{min}</Text>
+            </View>
+          </View>
+          <View style={{ flex: 1, backgroundColor: "#5FA8D3" ,marginHorizontal:5,borderRadius:20}}>
+          <View style={{flex:1,justifyContent:'center', alignItems:'center'}} > 
+              <Text style={{fontWeight:'bold', fontSize:20,fontStyle:'italic' }}>Max Score</Text>
+             </View>
+            <View style={{flex:3,justifyContent:'center', alignItems:'center'}} > 
+              <Text style={{fontWeight:'bold', fontSize:70 }}>{max}</Text>
+            </View>
+          </View>     
+       </View>
+      </View>
+      <View style={{ flex: 1, backgroundColor: "#CAE9FF", marginTop:10, marginHorizontal:50, borderRadius:30 }}>
+          <View style={{flex:1,justifyContent:'center', alignItems:'center'}}  >
+            <Text style={{fontWeight:'bold', fontSize:20,fontStyle:'italic' }}  > Average Score </Text>
+          </View>
+          <View style={{flex:3,justifyContent:'center', alignItems:'center'}} >
+            <Text style={{fontWeight:'bold', fontSize:70 }}>{avg}</Text>
+          </View>
+          <View style={{flex:1,justifyContent:'center', alignItems:'center'}} >
+            <Text >{notice}</Text>
+          </View>
+
+      </View>
+        
     </View>
   );
 }
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "#FCFFE7",
+    backgroundColor: "#ffffff",
     flex: 1,
     padding: 20,
   },

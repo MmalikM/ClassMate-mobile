@@ -6,10 +6,7 @@ import Register from "../screens/Register";
 import Stacks from "./Stacks";
 import Ionicons from "react-native-vector-icons/Ionicons";
 
-import dashboardIcon from "../../assets/dashboard-icon.png";
-import profileIcon from "../../assets/profile-icon.png";
-import loginIcon from "../../assets/login-icon.png";
-import registerIcon from "../../assets/register-icon.png";
+import dashboardIcon from "../../assets/classs.png";
 import { Image } from "react-native";
 import Statistik from "../screens/Statistik";
 
@@ -45,7 +42,7 @@ export default function Tabs() {
             <Image source={dashboardIcon} style={{ width: 200, height: 43 }} />
           ),
           headerStyle: {
-            backgroundColor: "#086B1B",
+            backgroundColor: "#ffffff",
           },
         }}
       />
@@ -57,7 +54,7 @@ export default function Tabs() {
             <Image source={dashboardIcon} style={{ width: 200, height: 43 }} />
           ),
           headerStyle: {
-            backgroundColor: "#086B1B",
+            backgroundColor: "#ffffff",
           },
         }}
       />
@@ -66,10 +63,10 @@ export default function Tabs() {
         component={Profile}
         options={{
           headerTitle: () => (
-            <Image source={profileIcon} style={{ width: 200, height: 43 }} />
+            <Image source={dashboardIcon} style={{ width: 200, height: 43 }} />
           ),
           headerStyle: {
-            backgroundColor: "#086B1B",
+            backgroundColor: "#ffffff",
           },
         }}
       />
