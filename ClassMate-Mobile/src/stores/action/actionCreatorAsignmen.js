@@ -16,12 +16,29 @@ export const fetchAsignmens = () => {
     const access_token = await AsyncStorage.getItem("access_token");
     try {
       // console.log(access_token);
-      const { data } = await axios.get(baseUrl + "answers", {
+      const { data } = await axios.get(baseUrl + "answers/assigned", {
         headers: {
           access_token: access_token,
         },
       });
       dispatch(fetchAsignmenSuccess(data));
+      dispatch(loadingAsignemSucsess());
+    } catch (error) {
+      throw error;
+    }
+  };
+};
+export const fetchReturned = () => {
+  return async (dispatch) => {
+    const access_token = await AsyncStorage.getItem("access_token");
+    try {
+      // console.log(access_token);
+      const { data } = await axios.get(baseUrl + "answers/returned", {
+        headers: {
+          access_token: access_token,
+        },
+      });
+      dispatch(fetchReturnedSuccess(data));
       dispatch(loadingAsignemSucsess());
     } catch (error) {
       throw error;
@@ -84,6 +101,13 @@ export const uploadImage = async (image, id) => {
 };
 
 export const fetchAsignmenSuccess = (payload) => {
+  return {
+    type: fetchAsignmen,
+    payload,
+  };
+};
+
+export const fetchReturnedSuccess = (payload) => {
   return {
     type: fetchAsignmen,
     payload,
