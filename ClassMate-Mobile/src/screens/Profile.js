@@ -1,6 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { useNavigation } from "@react-navigation/native";
-import { View, Text, StyleSheet, Button, StatusBar, Image, TouchableOpacity } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  Button,
+  StatusBar,
+  Image,
+  TouchableOpacity,
+} from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { login, logout } from "../../src/stores/action/actionCreatorUser"; // Import the login function
 import { useDispatch, useSelector } from "react-redux";
@@ -8,48 +16,45 @@ import axios from "axios";
 import Icon from "react-native-vector-icons/FontAwesome5";
 import { fetchAsignmens } from "../stores/action/actionCreatorAsignmen";
 
-
-
-const baseUrl = "http://localhost:3000/students/"
+const baseUrl =
+  "https://ff1d-2001-448a-1129-129b-b019-1ebb-37b9-9dd6.ap.ngrok.io/students/";
 
 const Profile = () => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const navigation = useNavigation();
   const [userData, setUserData] = useState(null);
   const [totalAssignments, setTotalAssingments] = useState(0);
   const { asignmens } = useSelector((state) => state.asignmens);
 
-
   const fetchUserData = async () => {
     try {
       const access_token = await AsyncStorage.getItem("access_token");
       console.log(access_token);
-      const {data} = await axios.get(baseUrl+'profile',{
-        headers:{
-          access_token : access_token
-        }
-      })
-      setUserData(data)
+      const { data } = await axios.get(baseUrl + "profile", {
+        headers: {
+          access_token: access_token,
+        },
+      });
+      setUserData(data);
     } catch (error) {
       console.log("Error fetching user data:", error);
     }
   };
-  
-  
+
   useEffect(() => {
     fetchUserData();
-    dispatch(fetchAsignmens())
+    dispatch(fetchAsignmens());
     setTotalAssingments(asignmens.length);
   }, []);
 
- async function logoutHandler(){
-  try {
-    await  dispatch(logout())
-    navigation.push("Login");
-  } catch (error) {
-    console.log(error);
+  async function logoutHandler() {
+    try {
+      await dispatch(logout());
+      navigation.push("Login");
+    } catch (error) {
+      console.log(error);
+    }
   }
- }
 
   // const logout = async () => {
   //   try {
@@ -66,17 +71,29 @@ const Profile = () => {
 
   return (
     <View style={styles.container}>
-      <View style={{flex:1, backgroundColor:"pink"}} >
+      <View style={{ flex: 1, backgroundColor: "pink" }}>
         <Image
-          source={{uri:'https://t4.ftcdn.net/jpg/02/03/27/53/360_F_203275317_FjB3VUNQ085ja7opvp27ue0pViq1bAIg.jpg'}}
-          style={{width:'100%',height:'100%'}}
+          source={{
+            uri: "https://t4.ftcdn.net/jpg/02/03/27/53/360_F_203275317_FjB3VUNQ085ja7opvp27ue0pViq1bAIg.jpg",
+          }}
+          style={{ width: "100%", height: "100%" }}
         />
       </View>
-      <View style={{flex:2, backgroundColor:"#ffffff"}} >
-        <View style={{justifyContent:"center",alignItems:'center'}} >
-          <Image 
-            source={{uri:'https://asianwiki.com/images/5/5e/Kim_So-Hyun-1999-p001.jpeg'}} 
-            style={{width:100, height:100, borderRadius:100/2, position:'absolute', borderColor:'#ffffff', borderWidth:4, zIndex:2}}
+      <View style={{ flex: 2, backgroundColor: "#ffffff" }}>
+        <View style={{ justifyContent: "center", alignItems: "center" }}>
+          <Image
+            source={{
+              uri: "https://asianwiki.com/images/5/5e/Kim_So-Hyun-1999-p001.jpeg",
+            }}
+            style={{
+              width: 100,
+              height: 100,
+              borderRadius: 100 / 2,
+              position: "absolute",
+              borderColor: "#ffffff",
+              borderWidth: 4,
+              zIndex: 2,
+            }}
           />
         </View>
         <View style={{ustifyContent:"center",alignItems:'center', marginTop:50}} >
@@ -126,9 +143,9 @@ const Profile = () => {
 
 const styles = StyleSheet.create({
   container: {
-    flexDirection:"column",
+    flexDirection: "column",
     flex: 1,
-    padding:10,
+    padding: 10,
     backgroundColor: "#FCFFE7",
   },
   title: {
