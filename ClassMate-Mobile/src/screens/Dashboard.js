@@ -28,15 +28,25 @@ export default function Dashboard() {
 
   return (
     <View style={styles.container}>
-      <View style={{flex:2}} >
-
+      <View style={{flex:1, flexDirection:'row'}} >
+        <View style={{flex:1, backgroundColor:'#1B4965',borderRadius:20,margin:5,}}>
+          <View style={{justifyContent:'center', alignItems:'center', marginVertical:15}} >
+            <Text style={{color:'#ffffff', fontWeight:'bold', fontSize:17}} >Returned</Text> 
+          </View>
+        </View>
+        <View style={{flex:1, backgroundColor:'#62B6CB', borderRadius:20,margin:5}}>
+        <View style={{justifyContent:'center', alignItems:'center', marginVertical:15}} >
+        <Text style={{color:'#ffffff', fontWeight:'bold', fontSize:17}} >Assigned</Text>
+          </View>
+        </View>
       </View>
-      <View style={styles.logoContainer}></View>
-      <FlatList
-        data={asignmens}
-        renderItem={({item})=> <CardAssignment item={item}/>}
-        numColumns={2}
-      />
+      <View style={styles.logoContainer}>
+        <FlatList
+          data={asignmens}
+          renderItem={({item})=> <CardAssignment item={item}/>}
+        
+        />
+      </View>
 
     </View>
   );
@@ -47,13 +57,13 @@ const styles = StyleSheet.create({
     fontFamily: 'DM Serif Display', // Use the font name without the file extension
   },
   container: {
-    backgroundColor: "#FCFFE7",
+    backgroundColor: "#ffffff",
     flex: 1,
     padding: 20,
   },
   logoContainer: {
     alignItems: "flex-start",
-    marginBottom: 10,
+    marginTop: 20,
     flex:10
   },
   logo: {
@@ -61,12 +71,5 @@ const styles = StyleSheet.create({
     height: 50,
     resizeMode: "contain",
   },
-  asignmensContainer: {
-    flex: 1,
-    marginBottom: 20,
-  },
-  buttonContainer: {
-    alignItems: "center",
-    justifyContent: "center",
-  },
+
 });

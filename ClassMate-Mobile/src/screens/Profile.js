@@ -104,13 +104,13 @@ const Profile = () => {
           <View style={{flexDirection:'row', marginTop:30}}>
             <Text><Icon name={'envelope'} size={30} color={"#bdbdbd"} style={{elevation:5}} /></Text>
             <View style={{justifyContent:'center', marginLeft:20}} >
-               <Text style={{fontSize:15}} >{userData.email}</Text>
+               <Text style={{fontSize:17}} >{userData.email}</Text>
             </View>
           </View>
           <View style={{flexDirection:'row', marginTop:10}} >
             <Text><Icon name={'school'} size={30} color={"#bdbdbd"} style={{elevation:5}} /></Text>
             <View style={{justifyContent:'center', marginLeft:13}} >
-               <Text style={{fontSize:15}} >{userData.Class.name}</Text>
+               <Text style={{fontSize:17}} >{userData.Class.name}</Text>
             </View>
           </View>
           <View style={{flexDirection:'row', marginTop:10}} >
@@ -122,7 +122,7 @@ const Profile = () => {
           <View style={{flexDirection:'row', marginTop:10}} >
             <Text><Icon name={'list-alt'} size={30} color={"#bdbdbd"} style={{elevation:5}} /></Text>
             <View style={{justifyContent:'center', marginLeft:18}} >
-               <Text style={{fontSize:15}} >{totalAssignments} Assignments</Text>
+               <Text style={{fontSize:17}} >{totalAssignments} Assignments</Text>
             </View>
           </View>
         </View>
