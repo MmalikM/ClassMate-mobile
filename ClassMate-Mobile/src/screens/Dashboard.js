@@ -8,9 +8,12 @@ import {
   ScrollView,
   Image,
   TouchableOpacity,
+  FlatList
 } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchAsignmens } from "../stores/action/actionCreatorAsignmen";
+import CardAssignment from "../components/CardAssignment";
+
 import logo from "../../assets/dashboard-icon.png"; // Update with your logo file name
 
 export default function Dashboard() {
@@ -18,29 +21,21 @@ export default function Dashboard() {
   const { asignmens } = useSelector((state) => state.asignmens);
   const dispatch = useDispatch();
 
-  function goToDetail(id){
-    navigation.navigate('Detail',{id})
-  }
-
   useEffect(() => {
     dispatch(fetchAsignmens()).catch((error) => console.log(error));
   }, []);
+  // console.log(asignmens);
 
   return (
     <View style={styles.container}>
       <View style={styles.logoContainer}></View>
-      <ScrollView style={styles.asignmensContainer}>
-        {asignmens?.map((asignmen, index) => {
-          return (
-            <TouchableOpacity key={index} onPress={()=> goToDetail(asignmen?._id) } >
-              <View  style={styles.card} >
-                <Text style={styles.asignmenName}>{asignmen?.Assignment.name}</Text>
-                <Text style={styles.asignmenClassId}>{asignmen?.Assignment.subject}</Text>
-              </View>  
-            </TouchableOpacity>
-          );
-        })}
-      </ScrollView>
+
+      <FlatList
+        data={asignmens}
+        renderItem={({item})=> <CardAssignment item={item}/>}
+       
+      />
+
     </View>
   );
 }
@@ -66,28 +61,6 @@ const styles = StyleSheet.create({
   asignmensContainer: {
     flex: 1,
     marginBottom: 20,
-  },
-  card: {
-    backgroundColor: "#ffffff",
-    borderRadius: 10,
-    padding: 15,
-    marginBottom: 10,
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
-    elevation: 5,
-  },
-  asignmenName: {
-    fontSize: 18,
-    fontWeight: "bold",
-  },
-  asignmenClassId: {
-    fontSize: 14,
-    color: "#666",
   },
   buttonContainer: {
     alignItems: "center",

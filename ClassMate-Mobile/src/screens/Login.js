@@ -25,7 +25,7 @@ export default function Login() {
   const submitLogin = async () =>{
     try {
       const data = await dispatch(login(email,password))
-      console.log(data.data.access_token);
+      // console.log(data.data.access_token);
       setEmail('')
       setPassword('')
       navigation.navigate('Dashboard')

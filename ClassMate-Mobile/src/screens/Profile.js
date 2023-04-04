@@ -3,9 +3,11 @@ import { useNavigation } from "@react-navigation/native";
 import { View, Text, StyleSheet, Button, StatusBar, Image, TouchableOpacity } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { login, logout } from "../../src/stores/action/actionCreatorUser"; // Import the login function
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import Icon from "react-native-vector-icons/FontAwesome5";
+import { fetchAsignmens } from "../stores/action/actionCreatorAsignmen";
+
 
 
 const baseUrl = "http://localhost:3000/students/"
@@ -15,6 +17,8 @@ const Profile = () => {
   const navigation = useNavigation();
   const [userData, setUserData] = useState(null);
   const [totalAssignments, setTotalAssingments] = useState(0);
+  const { asignmens } = useSelector((state) => state.asignmens);
+
 
   const fetchUserData = async () => {
     try {
@@ -25,15 +29,17 @@ const Profile = () => {
           access_token : access_token
         }
       })
-      setTotalAssingments(data.Class.Assignments.length);
       setUserData(data)
     } catch (error) {
       console.log("Error fetching user data:", error);
     }
   };
-
+  
+  
   useEffect(() => {
     fetchUserData();
+    dispatch(fetchAsignmens())
+    setTotalAssingments(asignmens.length);
   }, []);
 
  async function logoutHandler(){
@@ -43,7 +49,6 @@ const Profile = () => {
   } catch (error) {
     console.log(error);
   }
-
  }
 
   // const logout = async () => {
