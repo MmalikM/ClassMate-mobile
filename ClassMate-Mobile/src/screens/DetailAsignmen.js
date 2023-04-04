@@ -87,7 +87,7 @@ export default function DetailAsignmen({ route }) {
       /> */}
       <Text style={styles.title}>{detailAsignmen?.name}</Text>
       <View style={styles.card}>
-        <Text style={styles.cardTitle}>{detailAsignmen?.name}</Text>
+  
         <Text style={styles.cardText}>Subject: {detailAsignmen?.subject}</Text>
         <Text style={styles.cardText}>
           Class: {detailAsignmen?.ClassId?.name}
@@ -117,7 +117,7 @@ export default function DetailAsignmen({ route }) {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "#FCFFE7",
+    backgroundColor: "#ffffff",
     flex: 1,
     paddingHorizontal: 20,
   },
@@ -129,7 +129,7 @@ const styles = StyleSheet.create({
     marginTop:50
   },
   card: {
-    backgroundColor: "#FFFFFF",
+    backgroundColor: "#CAE9FF",
     borderRadius: 10,
     padding: 20,
     marginBottom: 20,
@@ -149,7 +149,7 @@ const styles = StyleSheet.create({
     marginBottom: 5,
   },
   buttonContainer: {
-    backgroundColor: "#006d77",
+    backgroundColor: "#1B4965",
     paddingVertical: 14,
     marginTop: 15,
     marginHorizontal: 100,
@@ -167,6 +167,6 @@ const styles = StyleSheet.create({
     height: 210,
    margin:100,
    borderWidth:5,
-   borderColor:'blue'
+   borderColor:'#62B6CB'
   },
 });

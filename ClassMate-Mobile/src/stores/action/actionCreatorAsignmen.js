@@ -48,36 +48,38 @@ export const fetchAsignmensById = (idAssignmet) => {
 };
 
 export const uploadImage = async (image, id) => {
-  try {
-    const access_token = await AsyncStorage.getItem("access_token");
-    console.log(access_token);
-    console.log(id);
-    console.log(image);
-    // let data = {
-    //   sale_id: 1,
-    //   note_type_id: 4,
-    //   description: "test",
-    //   note_content_item: " hi from broker hub",
-    // };
-    const formData = new FormData();
-    formData.append("data", JSON.stringify(data));
-    formData.append("image", {
-      uri: image.uri,
-      type: image.type,
-      name: image.fileName,
-    });
-    let { data } = await axios({
-      url: baseUrl + "upload/" + id,
-      method: "POST",
-      data: formData,
-      headers: {
-        "Content-Type": "multipart/form-data",
-        access_token: access_token,
-      },
-    });
-    console.log("response :", data);
-  } catch (error) {
-    console.log(error);
+  return async (dispatch) => {
+    try {
+      const access_token = await AsyncStorage.getItem("access_token");
+      console.log(access_token);
+      console.log(id);
+      console.log(image);
+      // let data = {
+      //   sale_id: 1,
+      //   note_type_id: 4,
+      //   description: "test",
+      //   note_content_item: " hi from broker hub",
+      // };
+      const formData = new FormData();
+      formData.append("data", JSON.stringify(data));
+      formData.append("image", {
+        uri: image.uri,
+        type: image.type,
+        name: image.fileName,
+      });
+      let { data } = await axios({
+        url: baseUrl + "upload/" + id,
+        method: "POST",
+        data: formData,
+        headers: {
+          "Content-Type": "multipart/form-data",
+          access_token: access_token,
+        },
+      });
+      console.log("response :", data);
+    } catch (error) {
+      console.log(error);
+    }
   }
 };
 

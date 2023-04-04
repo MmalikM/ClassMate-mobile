@@ -12,7 +12,6 @@ import {
 } from "react-native";
 import { useDispatch } from "react-redux";
 import { login } from "../stores/action/actionCreatorUser";
-import classmateKecil from "../../assets/classmate-kecil.png";
 import Icon from "react-native-vector-icons/FontAwesome5";
 
 import * as WebBrowser from "expo-web-browser";
@@ -25,6 +24,7 @@ export default function Login() {
   const [user, setUser] = useState(null);
 
   const [request, response, promptAsync] = Google.useAuthRequest({
+    clientId:"456966576685-tg7e1pp8rav794qoa6e0c8737goviu4p.apps.googleusercontent.com",
     iosClientId:
       "456966576685-tg7e1pp8rav794qoa6e0c8737goviu4p.apps.googleusercontent.com",
     webClientId:
@@ -66,15 +66,6 @@ export default function Login() {
 
   return (
     <View style={styles.container}>
-      {/* <Image
-        source={classmateKecil}
-        style={{
-          width: screenWidth,
-          height: newHeight,
-          alignSelf: "center",
-          marginBottom: 20,
-        }}
-      /> */}
       <View
         style={{
           justifyContent: "center",
@@ -107,11 +98,11 @@ export default function Login() {
           />
         </View>
         <View style={styles.input}>
-          <Text>
+          {/* <Text>
             <Icon name={"lock"} size={30} color={"#bdbdbd"} />
-          </Text>
+          </Text> */}
           <TouchableOpacity
-            style={{ marginLeft: 10 }}
+            style={{  }}
             onPress={() => setShowPassword(!showPassword)}
           >
             <Text>
