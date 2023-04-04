@@ -78,7 +78,7 @@ export default function Login() {
         }}
       /> */}
        <View style={{justifyContent:'center', alignItems :'center',marginTop:30, marginBottom:20}} >
-          <Image source={require('../../assets/pencil.png')} style={{height:150, width:150}}/>
+          <Image source={require('../../assets/iconic.png')} style={{height:150, width:150}}/>
         </View>
       <SafeAreaView style={styles.formContainer}>
         <View style={styles.input} >
@@ -163,7 +163,7 @@ export default function Login() {
 const styles = StyleSheet.create({
   container: {
     flexDirection: "column",
-    backgroundColor: "#CAE9FF",
+    backgroundColor: "#ffffff",
     flex: 1,
     paddingHorizontal: 20,
   },
@@ -190,7 +190,7 @@ const styles = StyleSheet.create({
     marginHorizontal:10
   },
   registerButton: {
-    backgroundColor: "#BEE9E8",
+    backgroundColor: "#62B6CB",
     paddingVertical: 14,
     marginTop:15 ,
     marginHorizontal: 100,

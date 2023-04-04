@@ -28,12 +28,14 @@ export default function Dashboard() {
 
   return (
     <View style={styles.container}>
-      <View style={styles.logoContainer}></View>
+      <View style={{flex:2}} >
 
+      </View>
+      <View style={styles.logoContainer}></View>
       <FlatList
         data={asignmens}
         renderItem={({item})=> <CardAssignment item={item}/>}
-       
+        numColumns={2}
       />
 
     </View>
@@ -52,6 +54,7 @@ const styles = StyleSheet.create({
   logoContainer: {
     alignItems: "flex-start",
     marginBottom: 10,
+    flex:10
   },
   logo: {
     width: 100,
