@@ -16,8 +16,9 @@ import axios from "axios";
 import Icon from "react-native-vector-icons/FontAwesome5";
 import { fetchAsignmens } from "../stores/action/actionCreatorAsignmen";
 
-const baseUrl =
-  "https://ff1d-2001-448a-1129-129b-b019-1ebb-37b9-9dd6.ap.ngrok.io/students/";
+// const baseUrl =
+//   "https://ff1d-2001-448a-1129-129b-b019-1ebb-37b9-9dd6.ap.ngrok.io/students/";
+  const baseUrl = "http://localhost:3000/students/";
 
 const Profile = () => {
   const dispatch = useDispatch();
