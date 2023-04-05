@@ -124,7 +124,7 @@ export default function Login() {
         >
           <Text style={styles.buttonText}>Login</Text>
         </TouchableOpacity>
-        <TouchableOpacity
+        {/* <TouchableOpacity
           style={styles.loginButton}
           disabled={!request}
           onPress={() => {
@@ -132,7 +132,7 @@ export default function Login() {
           }}
         >
           <Text style={styles.buttonText}>google Login</Text>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
         <View style={{ flexDirection: "row", justifyContent: "center" }}>
           <Text style={styles.registerButton}>Don't have account? </Text>
           <TouchableOpacity>
@@ -184,7 +184,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 10,
   },
   loginButton: {
-    backgroundColor: "#62B6CB",
+    backgroundColor: "#1B4965",
     paddingVertical: 14,
     marginTop: 15,
     marginHorizontal: 100,
@@ -197,6 +197,7 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     fontStyle: "italic",
     fontWeight: "bold",
+    textDecorationLine:'underline'
   },
   registerButton: {
     color: "black",
@@ -205,7 +206,7 @@ const styles = StyleSheet.create({
     borderRadius: 15,
   },
   buttonText: {
-    color: "#2f3e46",
+    color: "#ffffff",
     textAlign: "center",
     fontWeight: "bold",
   },

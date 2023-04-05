@@ -82,9 +82,9 @@ export default function Statistik() {
           chartConfig={{
             backgroundGradientFrom: "#1B4965",
             backgroundGradientFromOpacity: 1,
-            backgroundGradientTo: "#0353a4",
+            backgroundGradientTo: "#16425b",
             backgroundGradientToOpacity: 0.5,
-            color: (opacity) => "#ffffff",
+            color: (opacity) => "#f1e3d3",
             strokeWidth: 2,
             barPercentage: 0.5,
             useShadowColorFromDataset: false,
@@ -94,6 +94,7 @@ export default function Statistik() {
             alignSelf: "center",
             marginVertical: 20,
             flex: 7,
+            
           }}
         />
         
@@ -108,6 +109,13 @@ export default function Statistik() {
               backgroundColor: "#BEE9E8",
               marginHorizontal: 5,
               borderRadius: 20,
+              shadowColor: "#000",
+              shadowOffset: {
+                width: 0,
+                height: 2,
+              },
+              shadowOpacity: 0.25,
+              shadowRadius: 3,
             }}
           >
             <View
@@ -122,6 +130,8 @@ export default function Statistik() {
                   fontWeight: "bold",
                   fontSize: 20,
                   fontStyle: "italic",
+                  marginTop:15,
+                  color:'#033f63'
                 }}
               >
                 Min Score
@@ -134,7 +144,7 @@ export default function Statistik() {
                 alignItems: "center",
               }}
             >
-              <Text style={{ fontWeight: "bold", fontSize: 70 }}>{score.min}</Text>
+              <Text style={{ fontWeight: "bold", fontSize: 70, marginBottom:15,  color:'#033f63' }}>{score.min}</Text>
             </View>
           </View>
           <View
@@ -143,6 +153,13 @@ export default function Statistik() {
               backgroundColor: "#5FA8D3",
               marginHorizontal: 5,
               borderRadius: 20,
+              shadowColor: "#000",
+              shadowOffset: {
+                width: 0,
+                height: 2,
+              },
+              shadowOpacity: 0.25,
+              shadowRadius: 3,
             }}
           >
             <View
@@ -157,6 +174,8 @@ export default function Statistik() {
                   fontWeight: "bold",
                   fontSize: 20,
                   fontStyle: "italic",
+                  marginTop:15,
+                  color:'#daddd8'
                 }}
               >
                 Max Score
@@ -169,7 +188,7 @@ export default function Statistik() {
                 alignItems: "center",
               }}
             >
-              <Text style={{ fontWeight: "bold", fontSize: 70 }}>{score.max}</Text>
+              <Text style={{ fontWeight: "bold", fontSize: 70,marginBottom:15,color:'#daddd8'  }}>{score.max}</Text>
             </View>
           </View>
         </View>
@@ -181,27 +200,33 @@ export default function Statistik() {
           marginTop: 10,
           marginHorizontal: 50,
           borderRadius: 30,
+          shadowColor: "#000",
+          shadowOffset: {
+            width: 0,
+            height: 2,
+          },
+          shadowOpacity: 0.25,
+          shadowRadius: 3,
         }}
       >
         <View
           style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
         >
           <Text
-            style={{ fontWeight: "bold", fontSize: 20, fontStyle: "italic" }}
+            style={{ fontWeight: "bold", fontSize: 20, fontStyle: "italic", marginTop:15,color:'#102542' }}
           >
-            {" "}
-            Average Score{" "}
+            Average Score
           </Text>
         </View>
         <View
           style={{ flex: 3, justifyContent: "center", alignItems: "center" }}
         >
-          <Text style={{ fontWeight: "bold", fontSize: 70 }}>{score.avg}</Text>
+          <Text style={{ fontWeight: "bold", fontSize: 70, color:'#102542' }}>{score.avg}</Text>
         </View>
         <View
           style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
         >
-          <Text>{score.notice}</Text>
+          <Text style={{marginBottom:20, fontSize:15, fontWeight:'500',color:'#102542' }}>{score.notice}</Text>
         </View>
       </View>
     </View>

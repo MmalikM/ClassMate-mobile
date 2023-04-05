@@ -170,9 +170,9 @@ export default function DetailAsignmen({ route }) {
       </TouchableOpacity>
       </View>
       <View style={styles.imagePos}>
-        {/* {image && (
+        {image && (
           <Image source={{ uri: res.uri }} style={{ width: 200, height: 288 }} />
-        )} */}
+        )}
       </View>
     </View>
   );
