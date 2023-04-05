@@ -103,9 +103,7 @@ export default function Login() {
               />
         </View>
         <View style={styles.input} >
-        <Text><Icon name={'lock'} size={30} color={"#bdbdbd"} style={{elevation:5}} /></Text>
         <TouchableOpacity
-            style={{marginLeft:10}}
             onPress={() => setShowPassword(!showPassword)}
             >
               <Text>
