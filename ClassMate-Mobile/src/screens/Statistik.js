@@ -12,45 +12,47 @@ export default function Statistik() {
   const dispatch = useDispatch();
 
   const { returned,loadingAsignmen } = useSelector((state) => state.asignmens);
-  let max = "50";
-  let min = "50";
-  let notice = "sudah lelah ";
-
-  let newData={
-    labels: returned.title,
-    datasets: [
-    {
-      data: returned.score,
-    },
-  ],
-}
-
-   const data ={
+  const [data,setData] = useState({
     labels: ['a','b','c'],
         datasets: [
         {
           data:[60,70,90],
         },
       ],
-   }
-  
-  // function changeData(result){
-  //   console.log(result, apa);
-  //     let newData={
-  //       labels: result.title,
+  })
+  let max = "50";
+  let min = "50";
+  let notice = "sudah lelah ";
+
+  //  const data ={
+  //   labels: ['a','b','c'],
   //       datasets: [
   //       {
-  //         data: result.score,
+  //         data:[60,70,90],
   //       },
   //     ],
-  //     }
-  //     return newData
-  // }
+  //  }
+  
+  function changeData(result){
+      let newData={
+        labels: result.title||['a','b','c'],
+        datasets: [
+        {
+          data: result.score||[60,70,90],
+        },
+      ],
+      }
+      setData(newData)
+  }
 
   useEffect(() => {
      dispatch(fetchReturnedStat())
   }, []);
+  
 
+  useEffect(()=>{
+    changeData(returned)
+  },[returned])
 
   return (
     <View style={styles.container}>
