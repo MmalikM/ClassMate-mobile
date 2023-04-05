@@ -74,6 +74,21 @@ export const fetchReturnedStat = () => {
         score,
         title
       }
+      const minVal = Math.min(...result.score);
+      const maxVal = Math.max(...result.score);
+      const sum = result.score.reduce((total, val) => total + val);
+      const avg = sum / result.score.length;
+      result.max = maxVal
+      result.min = minVal
+      result.avg = avg
+
+      let notice=''
+      if(avg<60) notice = 'Jangan Malas, Ayo blajar !'
+      if(avg>=60&& avg<=85) notice = 'Tingkatkan lagi Belajarnya!'
+      if(avg>85) notice = 'Pertahankan! Jangan Mudah Puas'
+
+      result.notice = notice
+
       console.log(result,"<<data action");
       dispatch(fetchReturnedStatSuccess(result));
       dispatch(loadingAsignemSucsess());
@@ -114,7 +129,7 @@ export const fetchReturnedSuccess = (payload) => {
   };
 };
 export const fetchReturnedStatSuccess = (payload) => {
-  console.log(payload, "<<dari succes");
+  // console.log(payload, "<<dari succes");
   return {
     type: fetchReturnStat,
     payload,

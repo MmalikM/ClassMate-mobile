@@ -12,6 +12,7 @@ export default function Statistik() {
   const dispatch = useDispatch();
 
   const { returned,loadingAsignmen } = useSelector((state) => state.asignmens);
+  const [score, setScore] = useState({})
   const [data,setData] = useState({
     labels: ['a','b','c'],
         datasets: [
@@ -20,9 +21,6 @@ export default function Statistik() {
         },
       ],
   })
-  let max = "50";
-  let min = "50";
-  let notice = "sudah lelah ";
 
   //  const data ={
   //   labels: ['a','b','c'],
@@ -33,7 +31,7 @@ export default function Statistik() {
   //     ],
   //  }
   
-  function changeData(result){
+  function changeData(result){ 
       let newData={
         labels: result.title||['a','b','c'],
         datasets: [
@@ -44,6 +42,15 @@ export default function Statistik() {
       }
       setData(newData)
   }
+  function changeStat(result){
+    let newData = {
+      min: result.min||'-',
+      max: result.max||'-',
+      avg: result.avg||'-',
+      notice: result.notice||'',
+    }
+    setScore(newData)
+  }
 
   useEffect(() => {
      dispatch(fetchReturnedStat())
@@ -52,6 +59,7 @@ export default function Statistik() {
 
   useEffect(()=>{
     changeData(returned)
+    changeStat(returned)
   },[returned])
 
   return (
@@ -126,7 +134,7 @@ export default function Statistik() {
                 alignItems: "center",
               }}
             >
-              <Text style={{ fontWeight: "bold", fontSize: 70 }}>{min}</Text>
+              <Text style={{ fontWeight: "bold", fontSize: 70 }}>{score.min}</Text>
             </View>
           </View>
           <View
@@ -161,7 +169,7 @@ export default function Statistik() {
                 alignItems: "center",
               }}
             >
-              <Text style={{ fontWeight: "bold", fontSize: 70 }}>{max}</Text>
+              <Text style={{ fontWeight: "bold", fontSize: 70 }}>{score.max}</Text>
             </View>
           </View>
         </View>
@@ -188,12 +196,12 @@ export default function Statistik() {
         <View
           style={{ flex: 3, justifyContent: "center", alignItems: "center" }}
         >
-          <Text style={{ fontWeight: "bold", fontSize: 70 }}>70</Text>
+          <Text style={{ fontWeight: "bold", fontSize: 70 }}>{score.avg}</Text>
         </View>
         <View
           style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
         >
-          <Text>{notice}</Text>
+          <Text>{score.notice}</Text>
         </View>
       </View>
     </View>
