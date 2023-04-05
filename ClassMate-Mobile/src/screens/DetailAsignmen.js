@@ -96,6 +96,7 @@ export default function DetailAsignmen({ route }) {
     if (!result.cancelled) { 
       setImage(result.assets[0]);
       setRes(result)
+      // console.log(res);
      
     }
   };
@@ -170,9 +171,9 @@ export default function DetailAsignmen({ route }) {
       </TouchableOpacity>
       </View>
       <View style={styles.imagePos}>
-        {/* {image && (
-          <Image source={{ uri: res.uri }} style={{ width: 200, height: 288 }} />
-        )} */}
+        {image && (
+          <Image source={{ uri: image.uri }} style={{ width: 200, height: 288 }} />
+        )}
       </View>
     </View>
   );

@@ -103,9 +103,7 @@ export default function Login() {
               />
         </View>
         <View style={styles.input} >
-        <Text><Icon name={'lock'} size={30} color={"#bdbdbd"} style={{elevation:5}} /></Text>
         <TouchableOpacity
-            style={{marginLeft:10}}
             onPress={() => setShowPassword(!showPassword)}
             >
               <Text>
@@ -190,14 +188,14 @@ const styles = StyleSheet.create({
     marginHorizontal:10
   },
   registerButton: {
-    backgroundColor: "#62B6CB",
+    backgroundColor: "#1B4965",
     paddingVertical: 14,
     marginTop:15 ,
     marginHorizontal: 100,
     borderRadius: 15,
   },
   registerButtonText: {
-    color: "#2f3e46",
+    color: "#ffffff",
     textAlign: "center",
     fontWeight: 'bold'
   },

@@ -169,14 +169,14 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     marginTop: 0,
-    backgroundColor: "#62B6CB",
+    backgroundColor: "#1B4965",
     paddingVertical: 14,
     marginTop:15 ,
     marginHorizontal: 100,
     borderRadius: 15
   },
   buttonText: {
-    color: "#2f3e46",
+    color: "#ffffff",
     textAlign: "center",
     fontWeight: 'bold'
   },

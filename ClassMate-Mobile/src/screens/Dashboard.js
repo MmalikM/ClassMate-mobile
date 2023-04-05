@@ -54,7 +54,7 @@ export default function Dashboard() {
       <View style={styles.logoContainer}>
         <FlatList
           data={asignmens}
-          renderItem={({item})=> <CardAssignment item={item}/>}
+          renderItem={({item})=> <CardAssignment item={item} status={status} />}
         
         />
       </View>
