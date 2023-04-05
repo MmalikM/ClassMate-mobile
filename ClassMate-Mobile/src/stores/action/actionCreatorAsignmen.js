@@ -74,7 +74,7 @@ export const fetchReturnedStat = () => {
         score,
         title
       }
-      // console.log(result,"<<data action");
+      console.log(result,"<<data action");
       dispatch(fetchReturnedStatSuccess(result));
       dispatch(loadingAsignemSucsess());
     } catch (error) {
@@ -114,6 +114,7 @@ export const fetchReturnedSuccess = (payload) => {
   };
 };
 export const fetchReturnedStatSuccess = (payload) => {
+  console.log(payload, "<<dari succes");
   return {
     type: fetchReturnStat,
     payload,
